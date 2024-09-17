@@ -3,38 +3,30 @@ import * as PictureApi from './api/pictureApi';
 import './App.css';
 
 function App() {
-  const [pictureData, setPictureData] = useState<any>(null);
+  // const [pictureData, setPictureData] = useState<any>(null);
+  const [pictureListData, setPictureListData] = useState<any[]>([]);
 
-  const picture = async () => {
+  const listPictures = async () => {
     try {
-      const result = await PictureApi.getRandomPicture();
-      if (result && result.urls) {
-        setPictureData({
-          imageUrl: result.urls.full || result.urls.regular,
-          description: result.alt_description, 
-        });
-      } else {
-        console.log('Unexpected result:', result);
-      }
-    } catch (error) {
-      console.log(error);
+      const result = await PictureApi.getPhotos();    
+      setPictureListData(result);
+    } catch (error) { 
+      console.log(error)
     }
-  };
+  }
 
   useEffect(() => {
-    picture();
+    listPictures();
   }, []);
 
   return (
-    <div className='h-screen flex items-center justify-center'>
-      {pictureData ? ( 
-        <div className='flex flex-col gap-2'>
-          <img src={pictureData.imageUrl} alt={pictureData.description} className='h-60'/>
-          <h1>{pictureData.description}</h1>
+    <div className='flex flex-wrap gap-3'>
+      {pictureListData.map((pic) =>(
+        <div key={pic.id} className='flex flex-col gap-2'>
+          <img key={pic.id} src={pic.urls.raw} alt={pic.description} className='h-52' />
+          <h1>{pic.description}</h1>
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      ))}
     </div>
   );
 }
