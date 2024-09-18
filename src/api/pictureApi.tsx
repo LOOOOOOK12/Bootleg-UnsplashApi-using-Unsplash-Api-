@@ -18,9 +18,8 @@ export async function getRandomPicture() {
     }
 }
 
-
 export async function getPhotos(){
-    const url = `https://api.unsplash.com/photos/random?count=10`;
+    const url = `https://api.unsplash.com/photos/random?count=30`;
     const options = {
         method: 'GET',
         headers: {
@@ -38,4 +37,8 @@ export async function getPhotos(){
     } catch (error) {
         console.log(error)
     }
+}
+
+export async function searchPictures(params:any){
+
 }
