@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 
 type navProps = {
-    handleSearch: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleSearch?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function nav({handleSearch}: navProps) {
@@ -12,14 +12,19 @@ function nav({handleSearch}: navProps) {
         setOpenSearchModal(prevState => !prevState);
     }
     return (
-        <div className='sticky top-0 flex items-center justify-center bg-slate-400  py-2 px-5 gap-5 w-full border-b-[#2e2e2e]'>
-            <h1>L</h1>
-            <input 
-                placeholder="Search Photos and illustrations" 
-                type="search" onChange={handleSearch} 
-                onClick={handleSearchModalOnClick}
-                className='w-1/2 border border-red-500'
-            />
+        <div className='sticky top-0 flex items-center justify-between bg-slate-400 py-2 px-5 gap-5 w-full border-b-[#2e2e2e]'>
+            <div className='flex w-full gap-2'>
+                <h1>L</h1>
+                <input 
+                    placeholder="Search Photos and illustrations" 
+                    type="search" onChange={handleSearch} 
+                    onClick={handleSearchModalOnClick}
+                    className='w-full border border-red-500'
+                />
+            </div>
+            <div>
+                <h1>LOAK</h1>
+            </div>
             {/*{ openSearchModal &&( 
                 <div className="absolute top-12 left-0 bg-white border p-3 shadow-md">
                     <p>This is a small modal</p>
