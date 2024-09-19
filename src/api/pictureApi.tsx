@@ -39,6 +39,20 @@ export async function getPhotos(){
     }
 }
 
-export async function searchPictures(params:any){
+export async function searchPictures(search:string){
+    const url = `https://api.unsplash.com/search/photos?page=1&query?=${search}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            Authorization: `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`,
+        }
+    }
 
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error)
+    }
 }
