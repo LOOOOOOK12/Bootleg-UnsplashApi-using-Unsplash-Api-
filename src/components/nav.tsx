@@ -13,7 +13,7 @@ function nav({handleSearch}: navProps) {
         setOpenSearchModal(prevState => !prevState);
     }
     return (
-        <div className='sticky top-0 flex items-center justify-between bg-slate-400 py-2 px-5 gap-5 w-full border-b-[#2e2e2e]'>
+        <div className='sticky z-10 top-0 flex items-center justify-between bg-slate-400 py-2 px-5 gap-5 w-full border-b-[#2e2e2e]'>
             <div className='flex w-full gap-2'>
                 <h1>L</h1>
                 <Input
