@@ -1,21 +1,35 @@
-import React from 'react'
-import NavBar from '../components/nav'
+import NavBar from '../components/nav';
+import { useParams, useLocation } from 'react-router-dom';
 
 type PicturePageProps = {
     image: string;
     imageDescription: string;
-    location: string;    
-}
+    place: string;
+};
 
-function picturePage() {
+function PicturePage() {
+    const location = useLocation();
+
+    // Extract state passed from <Link>
+    const state = location.state as PicturePageProps | undefined;
+
+    if (!state) {
+        return <div>Error: No picture data available</div>; 
+    }
+
+    const { image, imageDescription, place } = state;
+
     return (
         <div>
-            <NavBar/>
+        <NavBar />
+        <div> 
+            <img src={image} alt={imageDescription} className='h-64'/>
             <div>
-
+                <p>{place}</p>
             </div>
         </div>
-    )
+        </div>
+    );
 }
 
-export default picturePage
+export default PicturePage;
