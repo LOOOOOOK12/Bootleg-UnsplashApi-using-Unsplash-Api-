@@ -1,6 +1,7 @@
 
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import React from 'react'
 import App from './App.tsx'
 import PicturePage from './pages/picturePage.tsx'
 import './index.css'
