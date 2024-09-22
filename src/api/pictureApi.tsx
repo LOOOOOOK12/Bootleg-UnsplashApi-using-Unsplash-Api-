@@ -39,6 +39,23 @@ export async function getPhotos(){
     }
 }
 
+export async function getTopics() {
+    const url = `https://api.unsplash.com//topics?page=1&per_page=3&order_by=featured`;
+    const options = {
+        method: 'GET',
+        headers: {
+            Authorization: `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`,
+        }
+    }
+    try {
+        const response = await fetch(url, options);
+        const result = response.json();
+        return result;
+    } catch (error) {   
+        console.log(error);
+    }
+}
+
 export async function searchPictures(search:string){
     const url = `https://api.unsplash.com/search/photos?page=1&query?=${search}`;
     const options = {
