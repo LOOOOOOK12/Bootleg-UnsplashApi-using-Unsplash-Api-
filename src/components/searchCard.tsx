@@ -8,7 +8,7 @@ type Topic = {
 };
 
 type SearchCardProps = {
-    topics?: Topic[]; // Ensure this matches the type expected
+    topics?: Topic[]; 
 }
 
 function SearchCard({ topics }: SearchCardProps) {
@@ -17,7 +17,7 @@ function SearchCard({ topics }: SearchCardProps) {
             <CardContent>
                 {topics && topics.length > 0 ? (
                     topics.map((topic) => (
-                        <p key={topic.id} className='text-black'>{topic.title}</p> // Render the title
+                        <p key={topic.id} className='text-black'>{topic.title}</p>
                     ))
                 ) : (
                     <p className='text-black'>No topics available</p>
