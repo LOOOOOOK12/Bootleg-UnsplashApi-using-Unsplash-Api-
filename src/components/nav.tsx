@@ -1,39 +1,42 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Input } from './ui/input';
+import SearchCard from './searchCard';
 
-type navProps = {
+type Topic = {
+    id: string;
+    slug: string;
+    title: string;
+};
+
+type NavProps = {
     handleSearch?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+    topicsData?: Topic[]; // Change to Topic[]
+};
 
-function nav({handleSearch}: navProps) {
+function Nav({ handleSearch, topicsData }: NavProps) {
     const [openSearchModal, setOpenSearchModal] = useState<boolean>(false);
 
-    const handleSearchModalOnClick =()=>{
-        setOpenSearchModal(prevState => !prevState);
-    }
+    const handleSearchModalOnClick = () => {
+        setOpenSearchModal(true);
+    };
+
     return (
         <div className='sticky z-10 top-0 flex items-center justify-between bg-slate-400 py-2 px-5 gap-5 w-full border-b-[#2e2e2e]'>
+            <h1>LOAK</h1>
             <div className='flex w-full gap-2'>
-                <h1>L</h1>
                 <Input
-                    placeholder="Search Photos and illustrations" 
-                    type="search" onChange={handleSearch} 
+                    placeholder="Search Photos and illustrations"
+                    type="search"
+                    onChange={handleSearch}
                     onClick={handleSearchModalOnClick}
-                    className='w-full border border-black'
+                    className='w-1/2 border border-black'
                 />
             </div>
-            <div>
-                <h1>LOAK</h1>
-            </div>
-            {/*{ openSearchModal &&( 
-                <div className="absolute top-12 left-0 bg-white border p-3 shadow-md">
-                    <p>This is a small modal</p>
-                    <button onClick={handleSearchModalOnClick}>Close</button>
-                </div>
-            )} */}
+            {openSearchModal && (
+                <SearchCard topics={topicsData} />
+            )}
         </div>
-    )
+    );
 }
 
-export default nav
+export default Nav;
