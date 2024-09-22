@@ -7,6 +7,8 @@ import './App.css';
 
 function App() {
   const [pictureListData, setPictureListData] = useState<any[]>([]);
+  const [searchPictureData, setSearchPictureData] = useState<any[]>([]);
+  const [topicData, setTopicData]= useState<any[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -20,22 +22,42 @@ function App() {
       console.log(error);
     }
     finally {
-    setIsLoading(false); // Stop loading once the request completes
+    setIsLoading(false);
     }
   };
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setSearchValue(event.target.value);
+    try {
+      setSearchValue(event.target.value);
+      const result = await PictureApi.searchPictures(searchValue)
+      setSearchPictureData(result);
+    } catch (error) {
+      console.log(error)
+    }
   };
 
+  const listTopics = async () => {
+    try {
+      const result = await PictureApi.getTopics();
+      setTopicData(result);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
+    listTopics();
     listPictures();
   }, []);
 
   return (
     <div className='flex flex-col gap-4'>
-      <NavBar handleSearch={handleSearch} />
+      <NavBar 
+        handleSearch={handleSearch} 
+        topicsData={topicData}
+      />
       <div className="flex flex-wrap gap-3">
         {isLoading
           ? Array(10) 
