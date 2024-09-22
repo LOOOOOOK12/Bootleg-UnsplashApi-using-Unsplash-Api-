@@ -1,5 +1,5 @@
 import NavBar from '../components/nav';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 type PicturePageProps = {
     image: string;
@@ -10,7 +10,6 @@ type PicturePageProps = {
 function PicturePage() {
     const location = useLocation();
 
-    // Extract state passed from <Link>
     const state = location.state as PicturePageProps | undefined;
 
     if (!state) {
@@ -21,7 +20,7 @@ function PicturePage() {
 
     return (
         <div>
-        <NavBar />
+        <NavBar/>
         <div> 
             <img src={image} alt={imageDescription} className='h-64'/>
             <div>
