@@ -2,9 +2,9 @@ export type Topics = {
     id: string;
     slug: string;
     title: string;
-    preview_photos : {
+    cover_photo : {
         urls: {
-            full: string;
+            thumb: string;
         }
     }
 };
