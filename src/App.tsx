@@ -48,19 +48,19 @@ function App() {
   }
 
   useEffect(() => {
-    listTopics();
-    listPictures();
+    // listTopics();
+    // listPictures();
   }, []);
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 bg-lightMode-background '>
       <NavBar 
         handleSearch={handleSearch} 
-        topicsData={topicData}
+        topicData={topicData}
       />
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap justify-center items-center gap-3">
         {isLoading
-          ? Array(10) 
+          ? Array(30) 
               .fill(0)
               .map((_, idx) => (
                 <Skeleton key={idx} className="h-52 w-52" /> 
