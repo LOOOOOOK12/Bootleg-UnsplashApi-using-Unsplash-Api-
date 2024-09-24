@@ -49,6 +49,9 @@ export async function getTopics() {
     }
     try {
         const response = await fetch(url, options);
+        if(!response.ok){
+            throw new Error(`Error: ${response.status}`);
+        }
         const result = response.json();
         return result;
     } catch (error) {   
