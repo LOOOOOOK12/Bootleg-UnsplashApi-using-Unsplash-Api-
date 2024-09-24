@@ -21,22 +21,29 @@ function SearchCard({ handleSearch, topicsData }: SearchCardProps) {
                         placeholder="Search Photos and illustrations"
                         type="search"
                         onChange={handleSearch}
-                        className="w-full border border-black"
+                        className="w-full border border-gray-400"
                     />
                 </PopoverTrigger>
             </div>
             <PopoverContent sideOffset={5} align="start">
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-2">
                     <h1>Topics</h1>
-                    {topicsData && topicsData.length > 0 ? (
-                        topicsData.map((topic, idx) => (
-                            <div key={idx} className="flex">
-                                <p className="text-black">{topic.title}</p>
-                            </div>
-                        ))
-                    ) : (
-                        <p className="text-black">No topics available</p>
-                    )}
+                    <div className=' flex flex-wrap gap-2'>
+                        {topicsData && topicsData.length > 0 ? (
+                            topicsData.map((topic, idx) => (
+                                <a key={idx} className="flex items-center pr-3 border border-black rounded-md">
+                                        <img
+                                            src={topic.cover_photo.urls.thumb}
+                                            alt={topic.title}
+                                            className="h-10 w-15 rounded-md"
+                                        />
+                                    <p className="text-black ml-2">{topic.title}</p>
+                                </a>
+                            ))
+                        ) : (
+                            <p className="text-black">No topics available</p>
+                        )}
+                    </div>
                 </div>
             </PopoverContent>
         </Popover>
