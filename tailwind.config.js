@@ -12,7 +12,24 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-  		colors: {}
+  		colors: {
+        lightMode :{
+          'text': '#0d0f12',
+          'background': '#f9fafb',
+          'primary': '#72819d',
+          'secondary': '#c7aebd',
+          'accent': '#b18c8f',
+        },
+        darkMode :{
+          colors: {
+            'text': '#edeff2',
+            'background': '#040506',
+            'primary': '#62718d',
+            'secondary': '#513847',
+            'accent': '#734e52',
+          },   
+        }
+      },
   	}
   },
   plugins: [require("tailwindcss-animate")],
