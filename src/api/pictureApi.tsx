@@ -19,7 +19,7 @@ export async function getRandomPicture() {
 }
 
 export async function getPhotos(){
-    const url = `https://api.unsplash.com/photos/random?count=30`;
+    const url = `https://api.unsplash.com/photos/random?count=30&orientation=portrait`;
     const options = {
         method: 'GET',
         headers: {
@@ -40,7 +40,7 @@ export async function getPhotos(){
 }
 
 export async function getTopics() {
-    const url = `https://api.unsplash.com//topics?page=1&per_page=3&order_by=featured`;
+    const url = `https://api.unsplash.com//topics?page=1&per_page=5&order_by=featured`;
     const options = {
         method: 'GET',
         headers: {
