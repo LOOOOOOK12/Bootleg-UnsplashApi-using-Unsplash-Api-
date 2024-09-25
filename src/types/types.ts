@@ -8,3 +8,9 @@ export type Topics = {
         }
     }
 };
+
+export type Search = {
+    results: {
+        
+    }
+}
