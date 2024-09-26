@@ -11,7 +11,7 @@ type SearchCardProps = {
     handleSearchData?: any[];
     handleSearch?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     topicsData?: Topics[];
-    darkMode?: boolean; // Add darkMode prop
+    darkMode?: boolean;
 };
 
 function SearchCard({ handleSearch, topicsData, handleSearchData, darkMode }: SearchCardProps) {
@@ -20,10 +20,10 @@ function SearchCard({ handleSearch, topicsData, handleSearchData, darkMode }: Se
             <div className="w-full">
                 <PopoverTrigger asChild>
                     <Input
-                        placeholder="Search Photos and illustrations"
+                        placeholder="Search photos and illustrations"
                         type="search"
                         onChange={handleSearch}
-                        className={`w-full border text-lightMode-text ${darkMode ? 'dark:bg-darkMode-colors-background dark:border-darkMode-colors-text' : 'border-gray-400'} duration-200`}
+                        className={`w-full border ${darkMode ? 'dark:bg-darkMode-colors-background dark:text-darkMode-colors-text dark:border-darkMode-colors-text' : 'border-gray-400'} duration-200`}
                     />
                 </PopoverTrigger>
             </div>
@@ -43,7 +43,7 @@ function SearchCard({ handleSearch, topicsData, handleSearchData, darkMode }: Se
                                 </a>
                             ))
                         ) : (
-                            <p className={`text-${darkMode ? 'lightMode-text' : 'black'}`}>No topics available</p>
+                            <p className={`${darkMode ? 'text-darkMode-colors-text' : 'text-lightMode-text'}`}>No topics available</p>
                         )}
                     </div>
                 </div>
