@@ -19,10 +19,12 @@ export async function getRandomPicture() {
 }
 
 export async function getPhotos(){
-    const url = `https://api.unsplash.com/photos/random?count=30&orientation=portrait`;
+    const url = `https://api.unsplash.com/photos/random?count=10&orientation=portrait`;
     const options = {
         method: 'GET',
         headers: {
+            "cache-control": "public, max-age=1000",
+            //...defaultHeaders,
             Authorization: `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`,
         }
     }
@@ -60,7 +62,7 @@ export async function getTopics() {
 }
 
 export async function searchPictures(search:string){
-    const url = `https://api.unsplash.com/search/photos?page=1&query?=${search}`;
+    const url = `https://api.unsplash.com/search/photos?page=1&query=${search}`;
     const options = {
         method: 'GET',
         headers: {
@@ -71,7 +73,7 @@ export async function searchPictures(search:string){
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        return result;
+        return result.results;
     } catch (error) {
         console.log(error)
     }
