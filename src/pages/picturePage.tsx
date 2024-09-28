@@ -20,13 +20,14 @@ function PicturePage() {
 
     return (
         <div>
-        <NavBar/>
-        <div> 
-            <img src={image} alt={imageDescription} className='h-64'/>
-            <div>
-                <p>{place}</p>
+            <NavBar/>
+            <div> 
+                <img src={image} alt={imageDescription} className='h-64'/>
+                <div className='flex flex-col'>
+                    <p>{imageDescription}</p>
+                    <p>{place}</p>
+                </div>
             </div>
-        </div>
         </div>
     );
 }
