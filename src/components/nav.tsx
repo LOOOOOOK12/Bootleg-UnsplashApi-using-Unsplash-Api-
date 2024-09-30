@@ -13,18 +13,18 @@ function Nav({ handleSearch, handleDarkMode, darkMode }: NavProps) {
 
     const onSearchSubmit = () => {
         if (handleSearch && searchInputRef.current) {
-          handleSearch(searchInputRef.current.value); // Pass the input value to the handler
+            handleSearch(searchInputRef.current.value);
         }
     };
 
     return (
         <nav className='sticky z-10 top-0 bg-lightMode-background flex items-center justify-between border border-x-0 border-t-0 border-b-gray-400 dark:bg-darkMode-colors-background dark:border-b-lightMode-background py-2 px-5 gap-5 w-full duration-200'>
             <div className='flex flex-row w-full items-center gap-2'>
-                <a href="#Home">{darkMode? <Image color='#f9fafb'/>: <Image color='#040506'/>}</a>
+                <a href="#Home">{darkMode? <Image color='#f9fafb'/>: <Image color='#040506' className='h-full'/>}</a>
                 <div className='w-1/2'>
-                    <form onSubmit={onSearchSubmit}> {/* Wrap in a form and handle onSubmit */}
+                    <form onSubmit={onSearchSubmit}> 
                         <Input
-                        ref={searchInputRef} // Attach the ref to the input
+                        ref={searchInputRef}
                         placeholder="Search photos and illustrations"
                         type="search"
                         className={`w-full border ${
