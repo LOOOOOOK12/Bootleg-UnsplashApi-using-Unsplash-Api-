@@ -36,7 +36,6 @@ function App() {
       try {
         const result = await PictureApi.searchPictures(value);
         setSearchData(result)
-        console.log("Full search API response:", result);
       } catch (error) {
         console.log("Error while searching pictures:", error);
       }
@@ -48,19 +47,15 @@ function App() {
   }, []);
 
   return (
-    <div
-      className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${
-        darkMode ? 'dark' : ''
-      }`}
-    >
+    <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${ darkMode ? 'dark' : '' }`}>
       <NavBar
-        handleSearch={handleSearch} // Pass the function that handles search input
+        handleSearch={handleSearch}
         handleDarkMode={toggleDarkmode}
         darkMode={darkMode}
       />
       <div
         id="Home"
-        className="flex flex-wrap justify-center items-center gap-3 dark:bg-darkMode-colors-background duration-200 pt-8"
+        className="flex flex-wrap justify-center items-center gap-3 dark:bg-darkMode-colors-background duration-200 py-8"
       >
         {isLoading ? (
           Array(30)
