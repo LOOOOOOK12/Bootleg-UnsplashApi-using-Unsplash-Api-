@@ -1,3 +1,4 @@
+import { DarkModeProps } from '@/types/types';
 import NavBar from '../components/nav';
 import { useLocation } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ type PicturePageProps = {
     place: string;
 };
 
-function PicturePage() {
+function PicturePage({ darkMode, toggleDarkmode }: DarkModeProps) {
     const location = useLocation();
 
     const state = location.state as PicturePageProps | undefined;
@@ -19,13 +20,16 @@ function PicturePage() {
     const { image, imageDescription, place } = state;
 
     return (
-        <div>
-            <NavBar/>
-            <div> 
+        <div className={` bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark': ''}`}>
+            <NavBar
+                handleDarkMode={toggleDarkmode} 
+                darkMode={darkMode}
+            />
+            <div className={`bg-lightMode-background dark:bg-darkMode-colors-background h-screen px-5`}> 
                 <img src={image} alt={imageDescription} className='h-64'/>
                 <div className='flex flex-col'>
-                    <p>{imageDescription}</p>
-                    <p>{place}</p>
+                    <p className='text-lightMode-text dark:text-darkMode-colors-text'>{imageDescription}</p>
+                    <p className='text-lightMode-text dark:text-darkMode-colors-text'>{place}</p>
                 </div>
             </div>
         </div>
