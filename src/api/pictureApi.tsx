@@ -1,9 +1,11 @@
+const Auth = `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`;
+
 export async function getRandomPicture() {
     const url = `https://api.unsplash.com/photos/random`;
     const options = {
         method: 'GET',
         headers: {
-            Authorization: `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`,
+            Authorization: Auth,
         }
     }
     try {
@@ -19,13 +21,13 @@ export async function getRandomPicture() {
 }
 
 export async function getPhotos(){
-    const url = `https://api.unsplash.com/photos/random?count=10&orientation=portrait`;
+    const url = `https://api.unsplash.com/photos/random?count=10`;
     const options = {
         method: 'GET',
         headers: {
             "cache-control": "public, max-age=1000",
             //...defaultHeaders,
-            Authorization: `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`,
+            Authorization: Auth,
         }
     }
 
@@ -46,7 +48,7 @@ export async function getTopics() {
     const options = {
         method: 'GET',
         headers: {
-            Authorization: `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`,
+            Authorization: Auth,
         }
     }
     try {
@@ -66,7 +68,7 @@ export async function searchPictures(search:string){
     const options = {
         method: 'GET',
         headers: {
-            Authorization: `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`,
+            Authorization: Auth,
         }
     }
 
