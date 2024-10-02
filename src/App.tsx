@@ -2,18 +2,14 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Skeleton } from './components/ui/skeleton';
 import NavBar from './components/nav';
+import { DarkModeProps } from './types/types';
 import * as PictureApi from './api/pictureApi';
 import './App.css';
 
-function App() {
-  const [darkMode, setDarkMode] = useState(false);
+function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   const [pictureListData, setPictureListData] = useState<any[]>([]);
   const [searchData, setSearchData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const toggleDarkmode = () => {
-    setDarkMode(!darkMode);
-  };
 
   const listPictures = async () => {
     try {
@@ -35,7 +31,8 @@ function App() {
     } else {
       try {
         const result = await PictureApi.searchPictures(value);
-        setSearchData(result)
+        setSearchData(result);
+        console.log(result);
       } catch (error) {
         console.log("Error while searching pictures:", error);
       }
@@ -47,16 +44,9 @@ function App() {
   }, []);
 
   return (
-    <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${ darkMode ? 'dark' : '' }`}>
-      <NavBar
-        handleSearch={handleSearch}
-        handleDarkMode={toggleDarkmode}
-        darkMode={darkMode}
-      />
-      <div
-        id="Home"
-        className="flex flex-wrap justify-center items-center gap-3 dark:bg-darkMode-colors-background duration-200 py-8"
-      >
+    <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
+      <NavBar handleSearch={handleSearch} handleDarkMode={toggleDarkmode} darkMode={darkMode} />
+      <div id="Home" className="h-screen flex flex-wrap justify-center items-center gap-3 py-8 dark:bg-darkMode-colors-background">
         {isLoading ? (
           Array(30)
             .fill(0)
@@ -79,7 +69,7 @@ function App() {
                 src={searchPic.urls.raw}
                 alt={searchPic.description || 'Image'}
                 title={searchPic.description || 'No description'}
-                className="h-52 text-lightMode-text dark:text-darkMode-colors-text"
+                className="h-52"
               />
             </Link>
           ))
@@ -99,7 +89,7 @@ function App() {
                 src={pic.urls.raw}
                 alt={pic.description || 'Image'}
                 title={pic.description || 'No description'}
-                className="h-52 text-lightMode-text dark:text-darkMode-colors-text"
+                className="h-52"
               />
             </Link>
           ))
