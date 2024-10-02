@@ -14,3 +14,14 @@ export type Search = {
         
     }
 }
+
+export type NavProps = {
+    handleSearch?: (value: string) => void;
+    handleDarkMode?: () => void;
+    darkMode?: boolean;
+};
+
+export type DarkModeProps = {
+    darkMode: boolean; 
+    toggleDarkmode: () => void;
+}
