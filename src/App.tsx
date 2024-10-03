@@ -33,6 +33,7 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
         const result = await PictureApi.searchPictures(value);
         setSearchData(result);
         console.log(result);
+        console.log(result.alternative_slugs.de)
       } catch (error) {
         console.log("Error while searching pictures:", error);
       }
@@ -53,26 +54,6 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
             .map((_, idx) => (
               <Skeleton key={idx} className="h-52 w-60" />
             ))
-        ) : searchData.length > 0 ? (
-          searchData.map((searchPic) => (
-            <Link
-              key={searchPic.id}
-              to={`/photo/${searchPic.id}`}
-              state={{
-                image: searchPic.urls.raw,
-                imageDescription: searchPic.description,
-                place: searchPic.location ? searchPic.location.name : 'Unknown',
-              }}
-            >
-              <img
-                id={searchPic.id}
-                src={searchPic.urls.raw}
-                alt={searchPic.description || 'Image'}
-                title={searchPic.description || 'No description'}
-                className="h-52"
-              />
-            </Link>
-          ))
         ) : (
           pictureListData.map((pic) => (
             <Link
