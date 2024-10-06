@@ -1,4 +1,4 @@
-export type NavProps = {
+export type NavFunctionProps = {
     handleSearch?: (value: string) => void;
 };
 
@@ -7,4 +7,4 @@ export type DarkModeProps = {
     toggleDarkmode?: () => void;
 }
 
-export type NavBarProps = NavProps & DarkModeProps
+export type NavBarProps = NavFunctionProps & DarkModeProps
