@@ -8,3 +8,9 @@ export type DarkModeProps = {
 }
 
 export type NavBarProps = NavFunctionProps & DarkModeProps
+
+export type PicturePageProps = {
+    image: string;
+    imageDescription: string;
+    place: string;
+};
