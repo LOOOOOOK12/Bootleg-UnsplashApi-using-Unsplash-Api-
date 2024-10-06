@@ -26,7 +26,6 @@ export async function getPhotos(){
         method: 'GET',
         headers: {
             "cache-control": "public, max-age=1000",
-            //...defaultHeaders,
             Authorization: Auth,
         }
     }
