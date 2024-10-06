@@ -1,6 +1,6 @@
-import { DarkModeProps } from '@/types/types';
+import { NavBarProps } from '@/types/types';
 import NavBar from '../components/nav';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type PicturePageProps = {
     image: string;
@@ -8,9 +8,9 @@ type PicturePageProps = {
     place: string;
 };
 
-function PicturePage({ darkMode, toggleDarkmode }: DarkModeProps) {
+function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
     const location = useLocation();
-
+    const navigate = useNavigate(); 
     const state = location.state as PicturePageProps | undefined;
 
     if (!state) {
@@ -19,14 +19,22 @@ function PicturePage({ darkMode, toggleDarkmode }: DarkModeProps) {
 
     const { image, imageDescription, place } = state;
 
+    const handleSearchAndNavigate = (newQuery: string) => {
+        if (handleSearch) {
+            handleSearch(newQuery); // Call handleSearch to perform the search
+            navigate(`/search/${newQuery}`); // Navigate to the SearchPage
+        }
+    };
+
     return (
-        <div className={` bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark': ''}`}>
+        <div className={` bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <NavBar
-                handleDarkMode={toggleDarkmode} 
+                toggleDarkmode={toggleDarkmode}
                 darkMode={darkMode}
+                handleSearch={handleSearchAndNavigate}
             />
-            <div className={`bg-lightMode-background dark:bg-darkMode-colors-background h-screen px-5`}> 
-                <img src={image} alt={imageDescription} className='h-64'/>
+            <div className={`bg-lightMode-background dark:bg-darkMode-colors-background h-screen flex flex-col items-center justify-center px-5`}>
+                <img src={image} alt={imageDescription} className='h-64' />
                 <div className='flex flex-col'>
                     <p className='text-lightMode-text dark:text-darkMode-colors-text'>{imageDescription}</p>
                     <p className='text-lightMode-text dark:text-darkMode-colors-text'>{place}</p>
