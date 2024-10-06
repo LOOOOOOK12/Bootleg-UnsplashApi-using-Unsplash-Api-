@@ -59,14 +59,14 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
               key={pic.id}
               to={`/photo/${pic.id}`}
               state={{
-                image: pic.urls.raw,
+                image: pic.urls.regular,
                 imageDescription: pic.description,
                 place: pic.location ? pic.location.name : 'Unknown',
               }}
             >
               <img
                 id={pic.id}
-                src={pic.urls.full}
+                src={pic.urls.regular}
                 alt={pic.description || 'Image'}
                 title={pic.description || 'No description'}
                 className="w-full h-80 grow"
