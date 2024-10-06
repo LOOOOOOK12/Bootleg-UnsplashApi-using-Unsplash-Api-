@@ -1,12 +1,7 @@
-import { NavBarProps } from '@/types/types';
+import { NavBarProps, PicturePageProps } from '@/types/types';
 import NavBar from '../components/nav';
-import { useLocation, useNavigate } from 'react-router-dom';
 
-type PicturePageProps = {
-    image: string;
-    imageDescription: string;
-    place: string;
-};
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
     const location = useLocation();
