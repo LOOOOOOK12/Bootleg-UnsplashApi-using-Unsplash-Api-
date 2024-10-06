@@ -1,19 +1,21 @@
 import React, { useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 import { Input } from './ui/input';
 import { Image, Moon, Sun } from 'lucide-react';
-import { NavProps } from '@/types/types';
+import { NavBarProps } from '@/types/types';
 
-function Nav({ handleSearch, handleDarkMode, darkMode }: NavProps) {
+function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
     const searchInputRef = useRef<HTMLInputElement>(null);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const onSearchSubmit = (event: React.FormEvent) => {
         event.preventDefault();
         if (handleSearch && searchInputRef.current) {
             const searchQuery = searchInputRef.current.value;
-            handleSearch(searchQuery);
-            navigate(`/search/${searchQuery}`);     
+            if (searchQuery) {
+                handleSearch(searchQuery);  // Ensure handleSearch is defined
+                navigate(`/search/${searchQuery}`);
+            }
         }
     };
 
@@ -36,7 +38,7 @@ function Nav({ handleSearch, handleDarkMode, darkMode }: NavProps) {
                     </form>
                 </div>
             </div>
-            <button onClick={handleDarkMode}>
+            <button onClick={toggleDarkmode}>
                 {darkMode ? <Sun color="#f9fafb" /> : <Moon color='#040506' />}
             </button>
         </nav>
