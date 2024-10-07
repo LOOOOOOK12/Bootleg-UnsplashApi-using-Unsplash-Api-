@@ -16,8 +16,8 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
 
     const handleSearchAndNavigate = (newQuery: string) => {
         if (handleSearch) {
-            handleSearch(newQuery); // Call handleSearch to perform the search
-            navigate(`/search/${newQuery}`); // Navigate to the SearchPage
+            handleSearch(newQuery);
+            navigate(`/search/${newQuery}`);
         }
     };
 
