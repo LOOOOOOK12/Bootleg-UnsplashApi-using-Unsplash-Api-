@@ -29,17 +29,19 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
         fetchSearchResults();
     }, [query]);
 
+    const handleSearchAndnavigate = (newQuery: string) => {
+        if(handleSearch) {
+            handleSearch(newQuery);
+            navigate(`/search/${newQuery}`);
+        }
+    }
+
     return (
         <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <NavBar 
                 toggleDarkmode={toggleDarkmode} 
                 darkMode={darkMode} 
-                handleSearch={(newQuery) => {
-                    if (handleSearch) {
-                        handleSearch(newQuery);
-                        navigate(`/search/${newQuery}`);
-                    }
-                }} 
+                handleSearch={handleSearchAndnavigate} 
             />
             <div className="max-h-full flex flex-wrap overflow-hidden justify-center gap-5 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
                 {isLoading ? (
