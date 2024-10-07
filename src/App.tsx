@@ -46,7 +46,7 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   return (
     <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
       <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode} />
-      <div id="Home" className="max-h-full flex flex-wrap overflow-hidden justify-center gap-5 py-8 px-5 dark:bg-darkMode-colors-background duration-200" >
+      <div id="Home" className="max-h-full flex flex-wrap overflow-hidden justify-center gap-3 py-8 px-5 dark:bg-darkMode-colors-background duration-200" >
         {isLoading ? (
           Array(30)
             .fill(0)
