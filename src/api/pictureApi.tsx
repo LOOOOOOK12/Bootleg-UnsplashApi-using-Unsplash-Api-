@@ -21,7 +21,7 @@ export async function getRandomPicture() {
 }
 
 export async function getPhotos(){
-    const url = `https://api.unsplash.com/photos/random?count=10`;
+    const url = `https://api.unsplash.com/photos/random?count=10&orientation=landscape`;
     const options = {
         method: 'GET',
         headers: {
