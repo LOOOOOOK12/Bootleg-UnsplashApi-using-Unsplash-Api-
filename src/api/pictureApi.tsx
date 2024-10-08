@@ -1,5 +1,6 @@
 const Auth = `Client-ID ${import.meta.env.VITE_ACCESS_KEY}`;
 
+//GetRandomPicture
 export async function getRandomPicture() {
     const url = `https://api.unsplash.com/photos/random`;
     const options = {
@@ -20,7 +21,29 @@ export async function getRandomPicture() {
     }
 }
 
-export async function getPhotos(){
+export async function getPhotos(page?: string) {
+    const url = `https://api.unsplash.com/photos?per_page=30&page=1`;
+    const options = {
+        method: 'GET',
+        headers: {
+            "cache-control": "public, max-age=1000",
+            Authorization: Auth,
+        }
+    }
+
+    try {
+        const response = await fetch(url, options);
+        if(!response.ok){
+            throw new Error(`Error: ${response.status}`);
+        }
+        const result = response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getRandomPhotos(){
     const url = `https://api.unsplash.com/photos/random?count=10&orientation=landscape`;
     const options = {
         method: 'GET',
@@ -62,7 +85,7 @@ export async function getTopics() {
     }
 }
 
-export async function searchPictures(search:string){
+export async function searchPictures(search: string){
     const url = `https://api.unsplash.com/search/photos?page=1&query=${search}`;
     const options = {
         method: 'GET',
