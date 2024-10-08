@@ -41,7 +41,7 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   const handlePrevPage = async () => {
     try {
       setPage((prevCount) => {
-        const newPage = prevCount > 0 ? prevCount - 1 : 0;
+        const newPage = prevCount > 1 ? prevCount - 1 : 1;
         console.log("Current page:", newPage); 
         return newPage;
       });
