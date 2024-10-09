@@ -13,7 +13,7 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
         if (handleSearch && searchInputRef.current) {
             const searchQuery = searchInputRef.current.value;
             if (searchQuery) {
-                handleSearch(searchQuery);  // Ensure handleSearch is defined
+                handleSearch(searchQuery);
                 navigate(`/search/${searchQuery}`);
             }
         }
