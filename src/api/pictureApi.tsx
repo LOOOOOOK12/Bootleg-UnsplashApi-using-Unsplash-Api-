@@ -21,8 +21,8 @@ export async function getRandomPicture() {
     }
 }
 
-export async function getPhotos(page?: string) {
-    const url = `https://api.unsplash.com/photos?per_page=30&page=1`;
+export async function getPhotos(page?: Number) {
+    const url = `https://api.unsplash.com/photos?per_page=30&page=${page}`;
     const options = {
         method: 'GET',
         headers: {
