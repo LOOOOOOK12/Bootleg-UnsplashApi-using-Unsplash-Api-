@@ -16,7 +16,7 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   const listPictures = async () => {
     try {
       setIsLoading(true);
-      const result = await PictureApi.getPhotos();
+      const result = await PictureApi.getPhotos(page);
       setPictureListData(result);
       console.log(result);
     } catch (error) {
@@ -32,7 +32,10 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
         const newPage = prevCount + 1;
         console.log("Current page:", newPage); 
         return newPage;
-      });
+      }); 
+      const result = await PictureApi.getPhotos(page);
+      setPictureListData(result);
+      console.log(result);
     } catch (error) {
       console.log(error)
     }
@@ -67,7 +70,7 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
 
   useEffect(() => {
     listPictures();
-  }, []);
+  }, [page]);
 
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
@@ -86,15 +89,15 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
               to={`/photo/${pic.id}`}
               state={{
                 image: pic.urls.regular,
-                imageDescription: pic.description,
+                imageDescription: pic.alt_description,
                 place: pic.location ? pic.location.name : 'Unknown',
               }}
             >
               <img
                 id={pic.id}
                 src={pic.urls.regular}
-                alt={pic.description || 'Image'}
-                title={pic.description || 'No description'}
+                alt={pic.alt_description || 'Image'}
+                title={pic.alt_description || 'No description'}
                 className="w-full h-80 grow"
               />
             </Link>
