@@ -27,7 +27,6 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
                 }
             }
         };
-
         fetchSearchResults();
     }, [query]);
 
