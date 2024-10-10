@@ -7,12 +7,12 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
     const location = useLocation();
     const navigate = useNavigate(); 
     const state = location.state as PicturePageProps | undefined;
-
+    console.log(state);
     if (!state) {
         return <div>Error: No picture data available</div>; 
     }
 
-    const { image, imageDescription, place } = state;
+    const { image, imageDescription, place} = state;
 
     const handleSearchAndNavigate = (newQuery: string) => {
         if (handleSearch) {
@@ -28,7 +28,7 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
                 darkMode={darkMode}
                 handleSearch={handleSearchAndNavigate}
             />
-            <div className={`bg-lightMode-background dark:bg-darkMode-colors-background h-screen flex flex-col items-center justify-center px-5`}>
+            <div  className={`bg-lightMode-background dark:bg-darkMode-colors-background h-screen flex flex-col items-center justify-center px-5`}>
                 <img src={image} alt={imageDescription} className='h-64' />
                 <div className='flex flex-col'>
                     <p className='text-lightMode-text dark:text-darkMode-colors-text'>{imageDescription}</p>
