@@ -18,7 +18,7 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
             if (query) {
                 try {
                     setIsLoading(true);
-                    const result = await PictureApi.searchPictures(query);
+                    const result = await PictureApi.searchPictures(query, page);
                     setSearchData(result);
                 } catch (error) {
                     console.log("Error fetching search results:", error);
@@ -28,7 +28,7 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
             }
         };
         fetchSearchResults();
-    }, [query]);
+    }, [query, page]);
 
     const handleNextPage = async () => {
             try {
@@ -82,6 +82,7 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
                                 image: searchPic.urls.regular,
                                 imageDescription: searchPic.description,
                                 place: searchPic.location ? searchPic.location.name : 'Unknown',
+                                color: searchPic.color,
                             }}
                         >
                             <img
