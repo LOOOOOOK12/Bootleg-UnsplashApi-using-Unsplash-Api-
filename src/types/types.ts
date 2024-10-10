@@ -16,7 +16,10 @@ export type PicturePageProps = {
     image: string;
     imageDescription: string;
     place: string;
+    color: string;
 };
+
+
 
 export type PageButtonProps = PageButtonFunctionProps & DarkModeProps;
 
