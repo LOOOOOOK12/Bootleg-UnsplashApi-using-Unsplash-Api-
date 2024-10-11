@@ -80,7 +80,7 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
                             to={`/photo/${searchPic.id}`}
                             state={{
                                 image: searchPic.urls.regular,
-                                imageDescription: searchPic.description,
+                                imageDescription: searchPic.alt_description,
                                 place: searchPic.location ? searchPic.location.name : 'Unknown',
                                 color: searchPic.color,
                             }}
@@ -88,7 +88,7 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
                             <img
                                 id={searchPic.id}
                                 src={searchPic.urls.regular}
-                                alt={searchPic.description || 'Image'}
+                                alt={searchPic.alt_description || 'Image'}
                                 title={searchPic.description || 'No description'}
                                 className="w-full h-80 grow"
                             />
