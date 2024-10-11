@@ -22,7 +22,7 @@ export async function getRandomPicture() {
 }
 
 export async function getPhotos(page?: Number) {
-    const url = `https://api.unsplash.com/photos?per_page=10&page=${page}`;
+    const url = `https://api.unsplash.com/photos?per_page=30&page=${page}`;
     const options = {
         method: 'GET',
         headers: {
@@ -86,7 +86,7 @@ export async function getTopics() {
 }
 
 export async function searchPictures(search?: string, page: Number = 1){
-    const url = `https://api.unsplash.com/search/photos?query=${search}&page=${page}`;
+    const url = `https://api.unsplash.com/search/photos?query=${search}&page=${page}&per_page=30`;
     const options = {
         method: 'GET',
         headers: {
@@ -99,5 +99,22 @@ export async function searchPictures(search?: string, page: Number = 1){
         return result.results;
     } catch (error) {
         console.log(error)
+    }
+}
+
+export async function getCollections(page: Number = 1){
+    const url = `https://api.unsplash.com/search/photos?page=${page}&per_page=30`;
+    const options = {
+        method: 'GET',
+        headers: {
+            Authorization: Auth,
+        }
+    }
+    try {
+        const response = await fetch(url, options);
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
     }
 }
