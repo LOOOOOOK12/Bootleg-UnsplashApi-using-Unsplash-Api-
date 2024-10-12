@@ -17,6 +17,7 @@ export type PicturePageProps = {
     imageDescription: string;
     place: string;
     color: string;
+    likes: number;
 };
 
 
