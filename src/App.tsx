@@ -91,6 +91,7 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
                 image: pic.urls.regular,
                 imageDescription: pic.alt_description,
                 place: pic.location ? pic.location.name : 'Unknown',
+                likes: pic.likes,
               }}
             >
               <img
