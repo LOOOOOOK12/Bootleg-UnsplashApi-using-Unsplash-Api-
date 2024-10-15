@@ -5,6 +5,7 @@ import NavBar from './components/nav';
 import { DarkModeProps } from './types/types';
 import * as PictureApi from './api/pictureApi';
 import PageButtons from './components/pageButtons';
+import SubNav from './components/subNav';
 import './App.css';
 
 function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
@@ -69,12 +70,13 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   };
 
   useEffect(() => {
-    listPictures();
+    // listPictures();
   }, [page]);
 
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
       <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode} />
+      <SubNav/>
       <div id="Home" className="max-h-full flex flex-wrap overflow-hidden justify-center gap-3 py-8 px-5 dark:bg-darkMode-colors-background duration-200" >
         {isLoading ? (
           Array(30)
