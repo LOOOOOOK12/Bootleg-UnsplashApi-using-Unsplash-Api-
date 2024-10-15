@@ -20,6 +20,14 @@ export type PicturePageProps = {
     likes: number;
 };
 
+export type CollectionPageProps = {
+    image: string;
+    title: string;
+    description: string;
+    totalPhotos: number;
+    user: string;
+}
+
 
 
 export type PageButtonProps = PageButtonFunctionProps & DarkModeProps;
