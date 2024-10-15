@@ -70,7 +70,7 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   };
 
   useEffect(() => {
-    // listPictures();
+    listPictures();
   }, [page]);
 
   return (
