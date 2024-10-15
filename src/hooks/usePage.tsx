@@ -6,7 +6,7 @@ type pageProps = {
     pageNumber: number;    
 }
 
-function usePage ({url, pageNumber}:pageProps){
+function usePage ({pageNumber}:pageProps){
     
     const [page, setPage] = useState(1);
 
@@ -17,8 +17,6 @@ function usePage ({url, pageNumber}:pageProps){
                 console.log("Current page:", newPage); 
                 return newPage;
             });
-            const result = await PictureApi.searchPictures(url, pageNumber);
-            return result;
         } catch (error) {
             console.log(error);
         }
