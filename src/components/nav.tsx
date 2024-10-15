@@ -20,7 +20,7 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
     };
 
     return (
-        <nav className='fixed z-10 top-0 bg-lightMode-background flex items-center justify-between border border-x-0 border-t-0 border-b-gray-400 dark:bg-darkMode-colors-background dark:border-b-lightMode-background py-2 px-5 gap-5 w-full duration-200'>
+        <nav className='sticky z-10 top-0 bg-lightMode-background flex items-center justify-between border border-x-0 border-t-0 border-b-gray-400 dark:bg-darkMode-colors-background dark:border-b-lightMode-background py-2 px-5 gap-5 w-full duration-200'>
             <div className='flex flex-row w-full items-center gap-2'>
                 <Link to={`/`}>
                     {darkMode ? <Image color='#f9fafb' /> : <Image color='#040506' className='h-full' />}
