@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.tsx';
 import PicturePage from './pages/picturePage.tsx';
 import SearchPage from './pages/searchPage.tsx';
+import CollectionsPage from './pages/collectionsPage.tsx'
+import CollectionPage from './pages/collectionPage.tsx';
 import { useState } from 'react';
 import './index.css';
 
@@ -25,6 +27,14 @@ function Main() {
     {
       path: '/search/:query',
       element: <SearchPage darkMode={darkMode} toggleDarkmode={toggleDarkmode} />,
+    },
+    {
+      path: '/collections',
+      element:<CollectionsPage darkMode={darkMode} toggleDarkmode={toggleDarkmode}/>
+    },
+    {
+      path:"/collections/:collectionId",
+      element: <CollectionPage/>
     },
   ]);
 
