@@ -103,7 +103,7 @@ export async function searchPictures(search?: string, page: Number = 1){
 }
 
 export async function getCollections(page: Number = 1){
-    const url = `https://api.unsplash.com/search/photos?page=${page}&per_page=30`;
+    const url = `https://api.unsplash.com/collections?page=${page}&per_page=30`;
     const options = {
         method: 'GET',
         headers: {
