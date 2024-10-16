@@ -16,16 +16,17 @@ function collectionPage({darkMode, toggleDarkmode}: NavBarProps) {
     const {image, title, description, totalPhotos, user} = state;
 
     return (
-        <div>
+        <div className={`bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <NavBar
                 darkMode = {darkMode}
                 toggleDarkmode={toggleDarkmode}
             />
-            <div className='flex flex-col gap-2'>
-                <img src={image} alt={title} />
-                <p>{description}</p>
-                <p>{totalPhotos}</p>
-                <p>{user}</p>
+            <div className='flex flex-col justify-center h-screen items-center gap-2 dark:bg-darkMode-colors-background'>
+                <img src={image} alt={title} className='h-80 w-60' />
+                <p>Title: {title}</p>
+                <p>Description: {description}</p>
+                <p>Total photos: {totalPhotos}</p>
+                <p>Username: {user}</p>
             </div>
         </div>
     )
