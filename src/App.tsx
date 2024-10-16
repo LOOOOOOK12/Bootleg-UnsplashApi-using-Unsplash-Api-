@@ -5,14 +5,14 @@ import NavBar from './components/nav';
 import { DarkModeProps } from './types/types';
 import * as PictureApi from './api/pictureApi';
 import PageButtons from './components/pageButtons';
-import SubNav from './components/subNav';
+import usePage from './hooks/usePage';
 import './App.css';
 
 function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   const [pictureListData, setPictureListData] = useState<any[]>([]);
   const [searchData, setSearchData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [page, setPage] = useState(1);
+  const {page , handleNextPage, handlePrevPage} = usePage(1)
 
   const listPictures = async () => {
     try {
@@ -26,33 +26,6 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
       setIsLoading(false);
     }
   };
-
-  const handleNextPage = async () => {
-    try {
-      setPage((prevCount) => {
-        const newPage = prevCount + 1;
-        console.log("Current page:", newPage); 
-        return newPage;
-      }); 
-      const result = await PictureApi.getPhotos(page);
-      setPictureListData(result);
-      console.log(result);
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const handlePrevPage = async () => {
-    try {
-      setPage((prevCount) => {
-        const newPage = prevCount > 1 ? prevCount - 1 : 1;
-        console.log("Current page:", newPage); 
-        return newPage;
-      });
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   const handleSearch = async (value: string) => {
     if (value.trim() === "") {
@@ -76,8 +49,7 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
       <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode} />
-      <SubNav/>
-      <div id="Home" className="max-h-full flex flex-wrap overflow-hidden justify-center gap-3 py-8 px-5 dark:bg-darkMode-colors-background duration-200" >
+      <div id="Home" className="max-h-full flex flex-wrap overflow-hidden justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
         {isLoading ? (
           Array(30)
             .fill(0)
