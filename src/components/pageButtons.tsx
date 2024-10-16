@@ -1,4 +1,3 @@
-import React from 'react'
 import { PageButtonProps } from '@/types/types'
 import { ChevronLeft, ChevronRight  } from 'lucide-react';
 
