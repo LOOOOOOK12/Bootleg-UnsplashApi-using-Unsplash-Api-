@@ -5,11 +5,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { DarkModeProps } from '@/types/types';
 import NavBar from '../components/nav';
 import { Link } from 'react-router-dom';
+import usePage from '@/hooks/usePage';
 
 function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
-    const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [collectionsData, setCollectionsData] = useState<any[]>([]);
+    const {page, handleNextPage, handlePrevPage} = usePage(1);
 
     const listCollection = async() => {
         try {
@@ -24,39 +25,13 @@ function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
         }
     }
 
-    const handleNextPage = async () =>{
-        try {
-            setPage((prevCount) => {
-                const newPage = prevCount + 1;
-                console.log("Current page:", newPage); 
-                return newPage;
-            });
-            const result = await PictureApi.getCollections(page);
-            setCollectionsData(result);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const handlePrevPage = async() =>{
-        try {
-            setPage((prevCount) => {
-                const newPage = prevCount > 1 ? prevCount - 1 : 1;
-                console.log("Current page:", newPage); 
-                return newPage;
-            });
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     useEffect(()=>{
         listCollection();
     }, [page])
 
     return (
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            <NavBar toggleDarkmode={toggleDarkmode}/>
+            <NavBar toggleDarkmode={toggleDarkmode} darkMode={darkMode}/>
             <div className="max-h-full flex flex-wrap overflow-hidden justify-center gap-3 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
                 {isLoading ? (
                     Array(30)
@@ -72,9 +47,9 @@ function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
                             state={{
                                 image: collection.cover_photo.urls.regular,
                                 title: collection.title,
-                                description: collection.description,
+                                description: collection.description || "No description",
                                 totalPhotos: collection.total_photos,
-                                user: collection.user
+                                user: collection.user.username
                             }}
                         >
                             <img
