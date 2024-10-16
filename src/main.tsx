@@ -33,7 +33,7 @@ function Main() {
       element:<CollectionsPage darkMode={darkMode} toggleDarkmode={toggleDarkmode}/>
     },
     {
-      path:"/collections/:collectionId",
+      path:"/collection/:collectionsId",
       element: <CollectionPage/>
     },
   ]);
