@@ -43,7 +43,7 @@ export async function getPhotos(page?: Number) {
     }
 }
 
-export async function getRandomPhotos(){
+export async function getRandomPhotos(orientation?: string,){
     const url = `https://api.unsplash.com/photos/random?count=10&orientation=landscape`;
     const options = {
         method: 'GET',
@@ -65,8 +65,8 @@ export async function getRandomPhotos(){
     }
 }
 
-export async function getTopics() {
-    const url = `https://api.unsplash.com//topics?page=1&per_page=1&order_by=featured`;
+export async function getTopics(page: Number = 1) {
+    const url = `https://api.unsplash.com//topics?page=1&per_page=5&order_by=featured`;
     const options = {
         method: 'GET',
         headers: {
@@ -82,6 +82,26 @@ export async function getTopics() {
         return result;
     } catch (error) {   
         console.log(error);
+    }
+}
+
+export async function getTopicPhotos(page: Number = 1, slug?: string) {
+    const url = `https://api.unsplash.com/topics/${slug}/photos?page=${page}&per_page=5`
+    const option = {
+        method : "GET",
+        headers:{
+            Authorization: Auth,
+        }
+    }
+    try {
+        const response = await fetch(url, option);
+        if(!response.ok){
+            throw new Error(`Error: ${response.status}`);
+        }
+        const result = response.json();
+        return result;
+    } catch (error) {
+        console.log(error)
     }
 }
 
