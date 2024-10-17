@@ -9,10 +9,10 @@ import usePage from './hooks/usePage';
 import './App.css';
 
 function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
-  const [pictureListData, setPictureListData] = useState<any[]>([]);
-  const [searchData, setSearchData] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const {page , handleNextPage, handlePrevPage} = usePage(1)
+  const [ pictureListData, setPictureListData ] = useState<any[]>([]);
+  const [ searchData, setSearchData ] = useState<any[]>([]);
+  const [ isLoading, setIsLoading ] = useState<boolean>(true);
+  const { page , handleNextPage, handlePrevPage } = usePage(1);
 
   const listPictures = async () => {
     try {
@@ -48,8 +48,8 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
 
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-      <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode} />
-      <div id="Home" className="max-h-full flex flex-wrap overflow-hidden justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
+      <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode}/>
+      <div id="Home" className="max-h-* flex flex-wrap overflow-hidden justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
         {isLoading ? (
           Array(30)
             .fill(0)
