@@ -29,7 +29,7 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
                 darkMode={darkMode}
                 handleSearch={handleSearchAndNavigate}
             />
-            <div  className={`h-screen bg-lightMode-background dark:bg-darkMode-colors-background flex flex-col items-center justify-center px-5`}>
+            <div  className={` max-h-* bg-lightMode-background dark:bg-darkMode-colors-background flex flex-col items-center justify-center px-5 py-8`}>
                 <img src={image} alt={imageDescription} className='h-80' />
                 <div className='flex flex-col'>
                     <p className='text-lightMode-text dark:text-darkMode-colors-text'>{imageDescription}</p>
