@@ -1,5 +1,6 @@
 export type NavFunctionProps = {
     handleSearch?: (value: string) => void;
+    topics?: string[];
 };
 
 export type DarkModeProps = {
