@@ -3,11 +3,15 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Input } from './ui/input';
 import { Image, Moon, Sun } from 'lucide-react';
 import { NavBarProps } from '@/types/types';
+import useGetTopics from '@/hooks/useGetTopics';
 
 function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
     const [searchQuery, setSearchQuery] = useState<string>(() => {
         return localStorage.getItem('recentSearch') || ''; 
     });
+
+    const { topicsData }= useGetTopics();
+    console.log(topicsData);
     const searchInputRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
     const location = useLocation();
@@ -44,7 +48,7 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
                                 ref={searchInputRef}
                                 placeholder="Search photos and illustrations"
                                 type="search"
-                                defaultValue={searchQuery} // Set the default value to recent search
+                                defaultValue={searchQuery}
                                 className={`w-full border ${darkMode
                                     ? 'dark:bg-darkMode-colors-background dark:text-darkMode-colors-text dark:border-darkMode-colors-text'
                                     : 'border-gray-400'} duration-200`}
@@ -57,7 +61,11 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
                 </button>
             </div>
             <div>
-                <div className='flex' >
+                <div className='flex gap-2' >
+                    {
+                        topicsData?.map((topic) => 
+                            <Link to={`/`} className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text'>{topic.slug}</Link>)
+                    }
                     <Link to={`/collections`} className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text'>Collections</Link>
                 </div>
             </div>
