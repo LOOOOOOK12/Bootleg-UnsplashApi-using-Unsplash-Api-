@@ -3,7 +3,7 @@ import * as PictureApi from '../api/pictureApi'
 
 export default function useGetTopics(page: Number = 1){
     const [topicsData, setTopicsData] = useState<any[]>([]);
-    const [error, setError] = useState<string | null>(null);
+    const [ error, setError] = useState<string | null>(null);
 
     useEffect(()=>{
         const fetchTopics = async () =>{
@@ -11,7 +11,7 @@ export default function useGetTopics(page: Number = 1){
                 const result = await PictureApi.getTopics()
                 setTopicsData(result);
             } catch (error) {
-                setError("Error fetching picture");
+                setError("Error has occured:");
             } 
         };
         fetchTopics();
