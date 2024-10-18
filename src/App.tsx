@@ -6,45 +6,14 @@ import { DarkModeProps } from './types/types';
 import * as PictureApi from './api/pictureApi';
 import PageButtons from './components/pageButtons';
 import usePage from './hooks/usePage';
+import useGetPhotos from './hooks/useGetPhotos.ts';
+import useSearch from './hooks/useSearch.ts';
 import './App.css';
 
 function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
-  const [ pictureListData, setPictureListData ] = useState<any[]>([]);
-  const [ searchData, setSearchData ] = useState<any[]>([]);
-  const [ isLoading, setIsLoading ] = useState<boolean>(true);
   const { page , handleNextPage, handlePrevPage } = usePage(1);
-
-  const listPictures = async () => {
-    try {
-      setIsLoading(true);
-      const result = await PictureApi.getPhotos(page);
-      setPictureListData(result);
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSearch = async (value: string) => {
-    if (value.trim() === "") {
-      setSearchData([]);
-      return;
-    } else {
-      try {
-        const result = await PictureApi.searchPictures(value);
-        setSearchData(result);
-        console.log(result);
-      } catch (error) {
-        console.log("Error while searching pictures:", error);
-      }
-    }
-  };
-
-  useEffect(() => {
-    listPictures();
-  }, [page]);
+  const { photosData, isLoading } = useGetPhotos(page);
+  const { handleSearch, searchData } = useSearch();
 
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
@@ -57,7 +26,7 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
               <Skeleton key={idx} className="h-52 w-60" />
             ))
         ) : (
-          pictureListData.map((pic) => (
+          photosData.map((pic) => (
             <Link
               key={pic.id}
               to={`/photo/${pic.id}`}
