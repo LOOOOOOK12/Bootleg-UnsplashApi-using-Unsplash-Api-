@@ -6,12 +6,11 @@ import { NavBarProps } from '@/types/types';
 import useGetTopics from '@/hooks/useGetTopics';
 
 function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
-    const [searchQuery, setSearchQuery] = useState<string>(() => {
-        return localStorage.getItem('recentSearch') || ''; 
-    });
-
-    const { topicsData }= useGetTopics();
+    
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const { topicsData } = useGetTopics();
     console.log(topicsData);
+
     const searchInputRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
     const location = useLocation();
@@ -21,10 +20,9 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
         if (handleSearch && searchInputRef.current) {
             const query = searchInputRef.current.value;
             if (query) {
-                setSearchQuery(query);
-                handleSearch(query);
-                localStorage.setItem('recentSearch', query);
-                navigate(`/search/${query}`);
+                setSearchQuery(query);  
+                handleSearch(query);   
+                navigate(`/search/${query}`);  
             }
         }
     };
@@ -48,7 +46,7 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
                                 ref={searchInputRef}
                                 placeholder="Search photos and illustrations"
                                 type="search"
-                                defaultValue={searchQuery}
+                                defaultValue={searchQuery} 
                                 className={`w-full border ${darkMode
                                     ? 'dark:bg-darkMode-colors-background dark:text-darkMode-colors-text dark:border-darkMode-colors-text'
                                     : 'border-gray-400'} duration-200`}
@@ -62,11 +60,17 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
             </div>
             <div>
                 <div className='flex gap-2' >
-                    {
-                        topicsData?.map((topic) => 
-                            <Link to={`/`} className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text'>{topic.slug}</Link>)
-                    }
-                    <Link to={`/collections`} className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text'>Collections</Link>
+                    {topicsData?.map((topic) => (
+                        <Link 
+                            key={topic.slug} 
+                            to={`/`} 
+                            className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text'>
+                            {topic.slug}
+                        </Link>
+                    ))}
+                    <Link to={`/collections`} className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text'>
+                        Collections
+                    </Link>
                 </div>
             </div>
         </nav>
