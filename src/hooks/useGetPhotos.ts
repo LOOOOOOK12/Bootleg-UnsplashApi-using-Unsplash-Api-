@@ -2,8 +2,7 @@ import { useState, useEffect  } from "react";
 import * as PictureApi from '../api/pictureApi'
 
 export default function useGetPhotos( page: number = 1) {
-    const [photosData, setPhotosData] = useState<any[]>([]);
-    const [ error, setError] = useState<string | null>(null);
+    const [ photosData, setPhotosData ] = useState<any[]>([]);
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
 
     useEffect(()=>{
@@ -14,7 +13,7 @@ export default function useGetPhotos( page: number = 1) {
                 setPhotosData(result);
                 console.log(result);
             } catch (error) {
-                setError("Error has Occured");
+                console.log()
             }
             finally{
                 setIsLoading(false);
@@ -25,5 +24,5 @@ export default function useGetPhotos( page: number = 1) {
     },[page])
 
 
-    return {photosData, error, isLoading }
+    return {photosData, isLoading }
 };
