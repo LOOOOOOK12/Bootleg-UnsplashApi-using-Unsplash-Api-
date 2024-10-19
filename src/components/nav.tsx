@@ -4,11 +4,13 @@ import { Input } from './ui/input';
 import { Image, Moon, Sun } from 'lucide-react';
 import { NavBarProps } from '@/types/types';
 import useGetTopics from '@/hooks/useGetTopics';
+import useGetTopicPhotos from '@/hooks/useGetTopicPhotos';
 
 function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
     
     const [searchQuery, setSearchQuery] = useState<string>('');
     const { topicsData } = useGetTopics();
+    const { topicPhotos } = useGetTopicPhotos();
     console.log(topicsData);
 
     const searchInputRef = useRef<HTMLInputElement>(null);
@@ -63,7 +65,7 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
                     {topicsData?.map((topic) => (
                         <Link 
                             key={topic.slug} 
-                            to={`/`} 
+                            to={`/${topic.slug}/photos`} 
                             className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text'>
                             {topic.slug}
                         </Link>
