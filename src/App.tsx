@@ -13,7 +13,7 @@ import './App.css';
 function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   const { page , handleNextPage, handlePrevPage } = usePage(1);
   const { photosData, isLoading } = useGetPhotos(page);
-  const { handleSearch, searchData } = useSearch();
+  const { handleSearch } = useSearch();
 
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
