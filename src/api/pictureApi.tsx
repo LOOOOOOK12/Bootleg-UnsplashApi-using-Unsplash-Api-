@@ -86,7 +86,7 @@ export async function getTopics(page: Number = 1) {
 }
 
 export async function getTopicPhotos(page: Number = 1, slug?: string) {
-    const url = `https://api.unsplash.com/topics/${slug}/photos?page=${page}&per_page=5`
+    const url = `https://api.unsplash.com/topics/${slug}/photos?page=${page}&per_page=10`
     const option = {
         method : "GET",
         headers:{
