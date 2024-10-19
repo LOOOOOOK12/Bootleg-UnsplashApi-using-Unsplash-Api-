@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import * as PictureApi from '../api/pictureApi'
 
 export default function useGetTopics(page: Number = 1){
-    const [topicsData, setTopicsData] = useState<any[]>([]);
+    const [ topicsData, setTopicsData ] = useState<any[]>([]);
     const [ error, setError] = useState<string | null>(null);
 
     useEffect(()=>{
