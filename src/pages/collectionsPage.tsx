@@ -1,37 +1,20 @@
 import PageButtons from '@/components/pageButtons'
-import { useEffect, useState } from 'react'
-import * as PictureApi from "../api/pictureApi"
 import { Skeleton } from '@/components/ui/skeleton';
 import { DarkModeProps } from '@/types/types';
 import NavBar from '../components/nav';
 import { Link } from 'react-router-dom';
 import usePage from '@/hooks/usePage';
+import useSearch from '@/hooks/useSearch.ts';
+import useGetCollection from '@/hooks/useGetCollection';
 
 function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [collectionsData, setCollectionsData] = useState<any[]>([]);
-    const {page, handleNextPage, handlePrevPage} = usePage(1);
-
-    const listCollection = async() => {
-        try {
-            setIsLoading(true);
-            const result = await PictureApi.getCollections(page);
-            setCollectionsData(result);
-        } catch (error) {
-            console.log(error);
-        }
-        finally{
-            setIsLoading(false);
-        }
-    }
-
-    useEffect(()=>{
-        listCollection();
-    }, [page])
+    const { page, handleNextPage, handlePrevPage} = usePage(1);
+    const { collectionsData,isLoading} = useGetCollection(page);
+    const { handleSearch }=useSearch();
 
     return (
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            <NavBar toggleDarkmode={toggleDarkmode} darkMode={darkMode}/>
+            <NavBar toggleDarkmode={toggleDarkmode} darkMode={darkMode} handleSearch={handleSearch}/>
             <div className="max-h-full flex flex-wrap overflow-hidden justify-center gap-3 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
                 {isLoading ? (
                     Array(30)
