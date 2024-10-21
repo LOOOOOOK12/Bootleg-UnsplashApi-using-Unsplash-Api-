@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Skeleton } from './components/ui/skeleton';
 import NavBar from './components/nav';
 import { DarkModeProps } from './types/types';
-import * as PictureApi from './api/pictureApi';
 import PageButtons from './components/pageButtons';
 import usePage from './hooks/usePage';
 import useGetPhotos from './hooks/useGetPhotos.ts';
