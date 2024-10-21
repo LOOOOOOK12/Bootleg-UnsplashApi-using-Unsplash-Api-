@@ -1,3 +1,4 @@
+
 export type NavFunctionProps = {
     handleSearch?: (value: string) => void;
     topics?: string[];
@@ -13,7 +14,26 @@ export type PageButtonFunctionProps = {
     togglePrevPage?: () => void;
 }
 
+//mainpage
+export type PictureProps = {
+    picturePageData: PicturePageProps[];
+    isLoading: boolean;
+    routes: Routes;
+}
+
+export type Routes = "photo" | "collections";
+
+export type PhotoGalleryProps = {
+    id: string;
+    image: string;
+    title: string;
+    alt: string;
+    link: string;
+}
+//mainpage
+
 export type PicturePageProps = {
+    id: string;
     image: string;
     imageDescription: string;
     place: string;
@@ -28,8 +48,6 @@ export type CollectionPageProps = {
     totalPhotos: number;
     user: string;
 }
-
-
 
 export type PageButtonProps = PageButtonFunctionProps & DarkModeProps;
 
