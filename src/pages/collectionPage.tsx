@@ -21,7 +21,7 @@ function collectionPage({darkMode, toggleDarkmode}: NavBarProps) {
                 darkMode = {darkMode}
                 toggleDarkmode={toggleDarkmode}
             />
-            <div className='flex flex-col justify-center h-screen items-center gap-2 dark:bg-darkMode-colors-background'>
+            <div className='flex flex-col justify-center h-screen items-center gap-2 dark:bg-darkMode-colors-background dark:text-darkMode-colors-text'>
                 <img src={image} alt={title} className='h-80 w-60' />
                 <p>Title: {title}</p>
                 <p>Description: {description}</p>
