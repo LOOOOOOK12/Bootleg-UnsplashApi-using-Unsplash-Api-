@@ -66,7 +66,7 @@ export async function getRandomPhotos(orientation?: string,){
 }
 
 export async function getTopics(page: Number = 1) {
-    const url = `https://api.unsplash.com//topics?page=1&per_page=5&order_by=featured`;
+    const url = `https://api.unsplash.com/topics?page=1&per_page=5&order_by=featured`;
     const options = {
         method: 'GET',
         headers: {
