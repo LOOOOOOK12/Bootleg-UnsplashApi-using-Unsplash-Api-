@@ -5,6 +5,7 @@ import PicturePage from './pages/picturePage.tsx';
 import SearchPage from './pages/searchPage.tsx';
 import CollectionsPage from './pages/collectionsPage.tsx'
 import CollectionPage from './pages/collectionPage.tsx';
+import Topicsgallery from './pages/topicsgallery.tsx';
 import { useState } from 'react';
 import './index.css';
 
@@ -36,6 +37,10 @@ function Main() {
       path:"/collection/:collectionsId",
       element: <CollectionPage darkMode={darkMode} toggleDarkmode={toggleDarkmode}/>
     },
+    {
+      path:"/topics/:slug/photos",
+      element: <Topicsgallery darkMode={darkMode} toggleDarkmode={toggleDarkmode}/>
+    }
   ]);
 
   return <RouterProvider router={router} />;
