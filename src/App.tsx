@@ -6,12 +6,14 @@ import PageButtons from './components/pageButtons';
 import usePage from './hooks/usePage';
 import useGetPhotos from './hooks/useGetPhotos.ts';
 import useSearch from './hooks/useSearch.ts';
+import useGetTopicPhotos from './hooks/useGetTopicPhotos.ts';
 import './App.css';
 
 function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   const { page , handleNextPage, handlePrevPage } = usePage(1);
   const { photosData, isLoading } = useGetPhotos(page);
   const { handleSearch } = useSearch();
+  // const { topicPhotos } = useGetTopicPhotos();
 
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
@@ -37,10 +39,10 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
             >
               <img
                 id={pic.id}
-                src={pic.urls.regular}
+                src={pic.urls.regular + "&auto=format"}
                 alt={pic.alt_description || 'Image'}
                 title={pic.alt_description || 'No description'}
-                className="w-full h-80 grow"
+                className='h-80'
               />
             </Link>
           ))
