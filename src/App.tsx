@@ -6,14 +6,12 @@ import PageButtons from './components/pageButtons';
 import usePage from './hooks/usePage';
 import useGetPhotos from './hooks/useGetPhotos.ts';
 import useSearch from './hooks/useSearch.ts';
-import useGetTopicPhotos from './hooks/useGetTopicPhotos.ts';
 import './App.css';
 
 function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   const { page , handleNextPage, handlePrevPage } = usePage(1);
   const { photosData, isLoading } = useGetPhotos(page);
   const { handleSearch } = useSearch();
-  // const { topicPhotos } = useGetTopicPhotos();
 
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
