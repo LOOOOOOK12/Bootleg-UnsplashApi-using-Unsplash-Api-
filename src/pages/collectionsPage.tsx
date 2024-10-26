@@ -9,8 +9,8 @@ import useGetCollection from '@/hooks/useGetCollection';
 
 function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
     const { page, handleNextPage, handlePrevPage} = usePage(1);
-    const { collectionsData,isLoading} = useGetCollection(page);
-    const { handleSearch }=useSearch();
+    const { collectionsData, isLoading} = useGetCollection(page);
+    const { handleSearch } = useSearch();
 
     return (
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
