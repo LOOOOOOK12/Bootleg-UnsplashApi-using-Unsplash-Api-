@@ -88,7 +88,7 @@ export async function getTopics() {
 }
 
 export async function getTopicPhotos(page: Number = 1, slug?: string) {
-    const url = `https://api.unsplash.com/topics/${slug}/photos?page=${page}&per_page=10`
+    const url = `https://api.unsplash.com/topics/${slug}/photos?page=${page}&per_page=30`
     const option = {
         method : "GET",
         headers:{
@@ -101,6 +101,7 @@ export async function getTopicPhotos(page: Number = 1, slug?: string) {
             throw new Error(`Error: ${response.status}`);
         }
         const result = response.json();
+        console.log(result)
         return result;
     } catch (error) {
         console.log(error)
