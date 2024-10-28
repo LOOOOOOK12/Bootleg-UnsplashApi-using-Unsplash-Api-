@@ -35,7 +35,7 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
     return (
         <nav className='sticky z-10 top-0 bg-lightMode-background flex flex-col justify-between border border-x-0 border-t-0 border-b-gray-400 dark:bg-darkMode-colors-background dark:border-b-lightMode-background py-2 px-4 gap-2 w-full duration-200'>
             <div className='flex flex-row w-full justify-between gap-2'>
-                <div className='flex w-full gap-4'>
+                <div className='flex w-full gap-4 items-center'>
                     <Link to={`/`}>
                         {darkMode ? <Image color='#f9fafb' /> : <Image color='#040506' className='h-full' />}
                     </Link>
@@ -63,11 +63,11 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
                         <Link 
                             key={topic.slug} 
                             to={`/topics/${topic.slug}/photos`} 
-                            className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text'>
+                            className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text dark:hover:bg-gray-700'>
                             {topic.slug}
                         </Link>
                     ))}
-                    <Link to={`/collections`} className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text'>
+                    <Link to={`/collections`} className='border border-gray-400 rounded-sm px-4 py-2 text-lightMode-text hover:bg-gray-200 duration-200 dark:text-darkMode-colors-text dark:hover:bg-gray-700'>
                         Collections
                     </Link>
                 </div>
