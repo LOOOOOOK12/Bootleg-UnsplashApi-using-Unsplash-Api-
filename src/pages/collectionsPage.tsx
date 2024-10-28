@@ -28,7 +28,7 @@ function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
                             key={collection.id}
                             to={`/collection/${collection.id}`}
                             state={{
-                                image: collection.cover_photo.urls.regular,
+                                image: collection.cover_photo.urls.regular +"&fit=max",
                                 title: collection.title,
                                 description: collection.description || "No description",
                                 totalPhotos: collection.total_photos,
