@@ -83,6 +83,7 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
                                 imageDescription: searchPic.alt_description,
                                 place: searchPic.location ? searchPic.location.name : 'Unknown',
                                 color: searchPic.color,
+                                likes: searchPic.likes || "0"
                             }}
                         >
                             <img
