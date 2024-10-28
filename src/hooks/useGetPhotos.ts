@@ -9,11 +9,12 @@ export default function useGetPhotos( page: number = 1) {
         const fetchPhotos = async () =>{
             try {
                 setIsLoading(true);
+                console.log(isLoading);
                 const result = await PictureApi.getPhotos(page);
                 setPhotosData(result);
                 console.log(result);
             } catch (error) {
-                console.log()
+                console.log(error);
             }
             finally{
                 setIsLoading(false);
