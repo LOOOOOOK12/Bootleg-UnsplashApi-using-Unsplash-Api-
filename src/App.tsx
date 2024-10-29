@@ -31,17 +31,17 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
               to={`/photo/${pic.id}`}
               state={{
                 image: pic.urls.regular,
-                imageDescription: pic.alt_description,
+                title:pic.alt_description,
+                description: pic.description || 'No description',
                 place: pic.location ? pic.location.name : 'Unknown',
                 likes: pic.likes || "0",
               }}
             >
               <img
                 id={pic.id}
-                src={pic.urls.raw + "&w=1500&dpr=2&fit=max"}
-                alt={pic.alt_description || 'Image'}
+                src={pic.urls.raw + "&auto=format&w=1080&h=300&fit=fill&auto=format"}
+                alt={pic.description || 'Image'}
                 title={pic.alt_description || 'No description'}
-                className='h-80 grow'
               />
             </Link>
           ))
