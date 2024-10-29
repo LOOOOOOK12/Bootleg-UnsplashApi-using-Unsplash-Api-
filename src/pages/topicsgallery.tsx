@@ -29,16 +29,18 @@ function TopicsGallery({ toggleDarkmode, darkMode }: DarkModeProps) {
                             to={`/photo/${pic.id}`}
                             state={{
                                 image: pic.urls.regular,
-                                imageDescription: pic.description,
+                                title: pic.alt_description,
+                                description: pic.description || 'No Description',
                                 place: pic.user.location ? pic.user.location.name : 'Unknown',
                                 likes: pic.likes,
+                                color: pic.color
                             }}
                         >
                             <img
                                 id={pic.id}
                                 src={pic.urls.regular}
-                                alt={pic.description || 'Image'}
-                                title={pic.description || 'No description'}
+                                alt={pic.alt_description || 'Image'}
+                                title={pic.alt_description || 'No description'}
                                 className="w-full h-80 grow"
                             />
                         </Link>
