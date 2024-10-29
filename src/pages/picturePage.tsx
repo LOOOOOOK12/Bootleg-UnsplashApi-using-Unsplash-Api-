@@ -6,14 +6,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
     const location = useLocation();
     const navigate = useNavigate(); 
-    const state = location.state as PicturePageProps | undefined;
+    const state = location.state;
     console.log(state);
 
     if (!state) {
         return <div>Error: No picture data available</div>; 
     }
 
-    const { image, imageDescription, place, likes, color} = state;
+    const { image, title , description, place, likes, color} = state;
 
     const handleSearchAndNavigate = (newQuery: string) => {
         if (handleSearch) {
@@ -29,13 +29,14 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
                 darkMode={darkMode}
                 handleSearch={handleSearchAndNavigate}
             />
-            <div  className={`h-screen bg-lightMode-background dark:bg-darkMode-colors-background flex flex-col items-center justify-center px-5 py-8`}>
-                <img src={image} alt={imageDescription} className='h-80 object-cover' />
+            <div  className={`h-screen bg-lightMode-background dark:bg-darkMode-colors-background flex flex-col gap-3 items-center justify-center px-5 py-8`}>
+                <img src={image} alt={title} className='h-80 object-cover' />
                 <div className='flex flex-col text-lightMode-text dark:text-darkMode-colors-text'>
-                    <p>{imageDescription}</p>
+                    <p>{title}</p>
+                    <p>{description}</p>
                     <p>{place}</p>
-                    <p><ThumbsUpIcon/>{likes}</p>
-                    {color ? (<p>color: {color}</p>):""}
+                    <p className='flex'><ThumbsUpIcon/>{likes}</p>
+                    <p>color: {color}</p>
                 </div>
             </div>
         </div>
