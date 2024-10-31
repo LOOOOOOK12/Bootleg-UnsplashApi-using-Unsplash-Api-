@@ -37,12 +37,15 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
                 likes: pic.likes || "0",
               }}
             >
-              <img
-                id={pic.id}
-                src={pic.urls.raw + "&auto=format&w=1080&h=300&fit=fill&auto=format"}
-                alt={pic.description || 'Image'}
-                title={pic.alt_description || 'No description'}
-              />
+              <div className='relative'>
+                <img
+                  id={pic.id}
+                  src={pic.urls.raw + "&auto=format&w=1080&h=300&fit=fill&auto=format"}
+                  alt={pic.description || 'Image'}
+                  title={pic.alt_description || 'No description'}
+                  className='object-cover'
+                />
+              </div>
             </Link>
           ))
         }
