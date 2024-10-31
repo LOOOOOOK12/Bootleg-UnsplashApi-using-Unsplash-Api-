@@ -58,7 +58,7 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
                 </button>
             </div>
             <div>
-                <div className='flex gap-2' >
+                <div className='hidden md:flex gap-2' >
                     {topicsData?.map((topic) => (
                         <Link 
                             key={topic.slug} 
