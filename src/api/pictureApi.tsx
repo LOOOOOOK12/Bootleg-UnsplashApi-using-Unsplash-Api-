@@ -97,3 +97,24 @@ export async function getCollections(page: Number = 1){
         console.log(error);
     }
 }
+
+export async function getCollectionPhotos(page: Number = 1, id?: any) {
+    const url = `https://api.unsplash.com/collections/${id}/photos?page=${page}&per_page=30`
+    const options = {
+        method: 'GET',
+        headers: {
+            Authorization: Auth,
+        }
+    }
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
