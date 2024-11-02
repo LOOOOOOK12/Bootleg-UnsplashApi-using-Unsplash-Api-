@@ -5,12 +5,13 @@ import { Skeleton } from '../components/ui/skeleton';
 import NavBar from '../components/nav';
 import { NavBarProps } from '@/types/types';
 import PageButtons from '@/components/pageButtons';
+import usePage from '@/hooks/usePage';
 
 function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
     const { query } = useParams<{ query: string }>();
     const [searchData, setSearchData] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [page, setPage] = useState(1);
+    const { page, handleNextPage, handlePrevPage} = usePage(1);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,30 +30,6 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
         };
         fetchSearchResults();
     }, [query, page]);
-
-    const handleNextPage = async () => {
-            try {
-            setPage((prevCount) => {
-                const newPage = prevCount + 1;
-                console.log("Current page:", newPage); 
-                return newPage;
-            });
-            } catch (error) {
-            console.log(error)
-            }
-        }
-        
-        const handlePrevPage = async () => {
-            try {
-            setPage((prevCount) => {
-                const newPage = prevCount > 1 ? prevCount - 1 : 1;
-                console.log("Current page:", newPage); 
-                return newPage;
-            });
-            } catch (error) {
-            console.log(error)
-            }
-        }
 
     const handleSearchAndnavigate = (newQuery: string) => {
         if(handleSearch) {
