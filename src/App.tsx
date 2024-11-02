@@ -16,13 +16,11 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
       <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode}/>
-      <div id="Home" className="flex flex-wrap overflow-hidden justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
+      <div id="Home" className="flex flex-wrap justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
         {photosData.map((pic) =>
           isLoading ? (
             <Blurhash
               hash={pic.blur_hash}
-              height={500}
-              width={150}
               punch={1}
             />
           ):(
