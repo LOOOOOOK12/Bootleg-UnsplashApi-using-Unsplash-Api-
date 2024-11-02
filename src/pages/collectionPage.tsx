@@ -1,14 +1,19 @@
-import { useLocation, useNavigate } from 'react-router-dom'
-import { NavBarProps, CollectionPageProps } from '@/types/types'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
+import { NavBarProps } from '@/types/types'
 import NavBar from '../components/nav'
-import { CircleUserRound, UserRound } from 'lucide-react';
+import { CircleUserRound } from 'lucide-react';
+import useGetCollectionPhoto from '@/hooks/useGetCollectionPhoto';
+import { Blurhash } from 'react-blurhash';
 
 function collectionPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
     const location = useLocation();
     const navigate = useNavigate();
-    const state = location.state as CollectionPageProps | undefined;
+    const state = location.state;
+    const { id, image, title, description, totalPhotos, user, pfp } = state;
 
-    console.log(state)
+    const { isloading, collectionPhotos } = useGetCollectionPhoto(1, id);
+
+    console.log(state);
 
     const handleSearchAndNavigate = (newQuery: string) => {
         if (handleSearch) {
@@ -21,22 +26,45 @@ function collectionPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps)
         return <div>Error: No collection data available</div>; 
     }
 
-    const {image, title, description, totalPhotos, user} = state;
-
     return (
-        <div className={`bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
+        <div className={`relative bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <NavBar
                 toggleDarkmode={toggleDarkmode}
                 darkMode={darkMode}
                 handleSearch={handleSearchAndNavigate}
             />
-            <div className='flex flex-col justify-center h-screen items-center gap-2 bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text'>
-                <img src={image} alt={title} className='h-80 w-60' />
-                <p>Title: {title}</p>
-                <p>Description: {description}</p>
-                <p>Total photos: {totalPhotos}</p>
-                <p className='flex gap-2'><CircleUserRound/> {user}</p>
+            <div className='flex flex-col items-center gap-3 px-4 py-8 bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text'>
+                <img src={image} alt={title} className='h-32 w-32 rounded-full' title={title} />
+                <div className='flex flex-col items-center gap-3'>
+                    <h1 className='font-bold text-5xl'>{title}</h1>
+                    <h2 className='flex gap-2 items-center text-xl'>{pfp? <img src={pfp} alt={user} className='rounded-full'/> : <CircleUserRound/> } {user}</h2>
+                    <h3 className='text-xl'>{description}</h3>
+                </div>
+                <div className='w-full h-full flex flex-col '>
+                    <p className='items-start'>Photos: {totalPhotos}</p>
+                    <div className='flex flex-wrap justify-center gap-2'>
+                        {collectionPhotos.map((pic) => 
+                            isloading ? (
+                                <Blurhash
+                                    hash={pic.blur_hash}
+                                />
+                            ) : (
+                                <Link
+                                    to={`/photo/${pic.id}`}
+                                    state={{
+                                        image:pic.urls.regular,
+                                    }}
+                                    >
+                                    <img src={pic.urls.regular + "&auto=format&w=1080&h=300&fit=fill&auto=format"} alt=""
+                                        className='object-cover'
+                                    />
+                                </Link>
+                            )
+                        )}
+                    </div>
+                </div>
             </div>
+            
         </div>
     )
 }
