@@ -4,14 +4,17 @@ import NavBar from '../components/nav'
 import { CircleUserRound } from 'lucide-react';
 import useGetCollectionPhoto from '@/hooks/useGetCollectionPhoto';
 import { Blurhash } from 'react-blurhash';
+import PageButtons from '@/components/pageButtons';
+import usePage from '@/hooks/usePage';
 
 function collectionPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
     const location = useLocation();
     const navigate = useNavigate();
+    const { page, handleNextPage, handlePrevPage } = usePage(1);
     const state = location.state;
     const { id, image, title, description, totalPhotos, user, pfp } = state;
 
-    const { isloading, collectionPhotos } = useGetCollectionPhoto(1, id);
+    const { isloading, collectionPhotos } = useGetCollectionPhoto(page, id);
 
     console.log(state);
 
@@ -33,8 +36,8 @@ function collectionPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps)
                 darkMode={darkMode}
                 handleSearch={handleSearchAndNavigate}
             />
-            <div className='flex flex-col items-center gap-3 px-4 py-8 bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text'>
-                <img src={image} alt={title} className='h-32 w-32 rounded-full' title={title} />
+            <div className='h-[82vh] flex flex-col overflow-auto items-center gap-3 px-4 py-8 bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text'>
+                <img src={image} alt={title} title={title} className='size-36 object-cover rounded-full'/>
                 <div className='flex flex-col items-center gap-3'>
                     <h1 className='font-bold text-5xl'>{title}</h1>
                     <h2 className='flex gap-2 items-center text-xl'>{pfp? <img src={pfp} alt={user} className='rounded-full'/> : <CircleUserRound/> } {user}</h2>
@@ -64,7 +67,7 @@ function collectionPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps)
                     </div>
                 </div>
             </div>
-            
+            <PageButtons toggleNextPage={handleNextPage} togglePrevPage={handlePrevPage} darkMode={darkMode}/>
         </div>
     )
 }
