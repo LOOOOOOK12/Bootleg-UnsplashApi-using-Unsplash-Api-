@@ -15,7 +15,7 @@ function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
     return (
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <NavBar toggleDarkmode={toggleDarkmode} darkMode={darkMode} handleSearch={handleSearch}/>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden justify-center gap-5 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden justify-center gap-7 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
                 {isLoading ? (
                     Array(30)
                         .fill(0)
