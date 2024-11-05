@@ -1,4 +1,4 @@
-import { NavBarProps, PicturePageProps } from '@/types/types';
+import { NavBarProps} from '@/types/types';
 import NavBar from '../components/nav';
 import { ThumbsUpIcon } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
         return <div>Error: No picture data available</div>; 
     }
 
-    const { image, title , description, place, likes, color} = state;
+    const { image, title , description, place, likes, color, userPfp, user} = state;
 
     const handleSearchAndNavigate = (newQuery: string) => {
         if (handleSearch) {
@@ -23,20 +23,26 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
     };
 
     return (
-        <div className={`bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
+        <div className={`relative bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <NavBar
                 toggleDarkmode={toggleDarkmode}
                 darkMode={darkMode}
                 handleSearch={handleSearchAndNavigate}
             />
-            <div  className={`h-screen bg-lightMode-background dark:bg-darkMode-colors-background flex flex-col gap-3 items-center justify-center px-5 py-8`}>
-                <img src={image} alt={title} className='h-80 object-cover' />
-                <div className='flex flex-col text-lightMode-text dark:text-darkMode-colors-text'>
-                    <p>{title}</p>
-                    <p>{description}</p>
-                    <p>{place}</p>
-                    <p className='flex'><ThumbsUpIcon/>{likes}</p>
-                    <p>color: {color}</p>
+            <div className={`h-screen bg-lightMode-background dark:bg-darkMode-colors-background flex flex-col gap-3 justify-center px-5 py-8`}>
+                <div className='flex gap-2 items-center'>
+                    <img src={userPfp} alt={user} className='rounded-full'/>
+                    <h1>{user}</h1>
+                </div>
+                <div className='flex flex-col justify-center items-center text-lightMode-text dark:text-darkMode-colors-text'>
+                    <img src={image} alt={title} className='h-80 object-cover' />
+                    <div className='flex flex-col items-start'>
+                        <p>{title}</p>
+                        <p>{description}</p>
+                        <p>{place}</p>
+                        <p className='flex gap-2'><ThumbsUpIcon/>{likes}</p>
+                        <p>color: {color}</p>
+                    </div>
                 </div>
             </div>
         </div>
