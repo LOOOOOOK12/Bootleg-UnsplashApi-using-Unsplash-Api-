@@ -13,7 +13,7 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
         return <div>Error: No picture data available</div>; 
     }
 
-    const { image, title , description, place, likes, color, userPfp, user} = state;
+    const { image, title , description, likes, userPfp, user, forHire} = state;
 
     const handleSearchAndNavigate = (newQuery: string) => {
         if (handleSearch) {
@@ -29,19 +29,20 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
                 darkMode={darkMode}
                 handleSearch={handleSearchAndNavigate}
             />
-            <div className={`h-screen bg-lightMode-background dark:bg-darkMode-colors-background flex flex-col gap-3 justify-center px-5 py-8`}>
-                <div className='flex gap-2 items-center'>
+            <div className={`min-h-full text-lightMode-text bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text flex flex-col gap-3 px-5 py-8`}>
+                <div className='flex gap-2 items-center text-sm'>
                     <img src={userPfp} alt={user} className='rounded-full'/>
-                    <h1>{user}</h1>
+                    <div className='flex flex-col'>
+                        <h1 className='font-semibold'>{user}</h1>
+                        <p className={`${forHire ? `text-green-400`:`text-red-500`}`}>{forHire? `For hire` : `Not for hire`}</p>
+                    </div>
                 </div>
-                <div className='flex flex-col justify-center items-center text-lightMode-text dark:text-darkMode-colors-text'>
-                    <img src={image} alt={title} className='h-80 object-cover' />
+                <div className='flex flex-col justify-center items-center gap-4'>
+                    <img src={image} alt={title} className='h-96 object-cover' />
                     <div className='flex flex-col items-start'>
                         <p>{title}</p>
                         <p>{description}</p>
-                        <p>{place}</p>
                         <p className='flex gap-2'><ThumbsUpIcon/>{likes}</p>
-                        <p>color: {color}</p>
                     </div>
                 </div>
             </div>
