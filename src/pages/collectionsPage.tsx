@@ -1,11 +1,11 @@
 import PageButtons from '@/components/pageButtons'
-import { Skeleton } from '@/components/ui/skeleton';
 import { DarkModeProps } from '@/types/types';
 import NavBar from '../components/nav';
 import { Link } from 'react-router-dom';
 import usePage from '@/hooks/usePage';
 import useSearch from '@/hooks/useSearch.ts';
 import useGetCollection from '@/hooks/useGetCollection';
+import { Blurhash } from 'react-blurhash';
 
 function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
     const { page, handleNextPage, handlePrevPage} = usePage(1);
@@ -16,14 +16,15 @@ function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <NavBar toggleDarkmode={toggleDarkmode} darkMode={darkMode} handleSearch={handleSearch}/>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden justify-center gap-7 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
-                {isLoading ? (
-                    Array(30)
-                        .fill(0)
-                        .map((_, idx) => (
-                            <Skeleton key={idx}/>
-                        ))
-                ) : (
-                    collectionsData.map((collection,idx) => (
+                {collectionsData.map((collection,idx) =>
+                isLoading ? (
+                    <Blurhash
+                        hash={collection.blur_hash}
+                        width={300}
+                        height={250}
+                        punch={1}
+                    />
+                    ):(
                         <Link
                             key={idx}
                             to={`/collections/${collection.id}/photos`}
@@ -59,7 +60,7 @@ function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
                             </div>
                         </Link>
                     ))
-                )}
+                }
             </div>
             <PageButtons toggleNextPage={handleNextPage} togglePrevPage={handlePrevPage} darkMode={darkMode}/>
         </div>
