@@ -1,11 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
-import { Skeleton } from '@/components/ui/skeleton';
 import NavBar from '../components/nav';
 import PageButtons from '@/components/pageButtons';
 import { DarkModeProps } from '@/types/types'; 
 import useGetTopicPhotos from '@/hooks/useGetTopicPhotos';
 import usePage from '@/hooks/usePage';
 import useSearch from '@/hooks/useSearch';
+import { Blurhash } from 'react-blurhash';
 
 function TopicsGallery({ toggleDarkmode, darkMode }: DarkModeProps) {
     const { page, handleNextPage, handlePrevPage } = usePage(1);
@@ -18,12 +18,15 @@ function TopicsGallery({ toggleDarkmode, darkMode }: DarkModeProps) {
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode}/>
             <div id="Home" className="max-h-* flex flex-wrap overflow-hidden justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
-                {isLoading ? (
-                    Array(30).fill(0).map((_, idx) => (
-                        <Skeleton key={idx} className="h-52 w-60" />
-                    ))
-                ) : (
-                    topicPhotos.map((pic) => (
+                {topicPhotos.map((pic) => 
+                isLoading ? (
+                    <Blurhash
+                        hash={pic.blur_hash}
+                        width={300}
+                        height={250}
+                        punch={1}
+                    />
+                ):(
                         <Link
                             key={pic.id}
                             to={`/photo/${pic.id}`}
@@ -47,7 +50,7 @@ function TopicsGallery({ toggleDarkmode, darkMode }: DarkModeProps) {
                             />
                         </Link>
                     ))
-                )}
+                }
             </div>
             <PageButtons toggleNextPage={handleNextPage} togglePrevPage={handlePrevPage} darkMode={darkMode} />
         </div>
