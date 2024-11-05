@@ -33,6 +33,8 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
                 description: pic.description || 'No description',
                 place: pic.location ? pic.location.name : 'Unknown',
                 likes: pic.likes || "0",
+                userPfp: pic.user.profile_image.small,
+                user: pic.user.username
               }}
             >
               <div className='relative'>
