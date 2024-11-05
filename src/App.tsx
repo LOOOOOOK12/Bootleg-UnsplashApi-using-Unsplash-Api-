@@ -28,19 +28,20 @@ function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
               key={pic.id}
               to={`/photo/${pic.id}`}
               state={{
-                image: pic.urls.regular,
+                image: pic.urls.raw + "w=9000&dpr=2",
                 title:pic.alt_description,
                 description: pic.description || 'No description',
                 place: pic.location ? pic.location.name : 'Unknown',
                 likes: pic.likes || "0",
                 userPfp: pic.user.profile_image.small,
-                user: pic.user.username
+                user: pic.user.username,
+                forHire: pic.for_hire
               }}
             >
               <div className='relative'>
                 <img
                   id={pic.id}
-                  src={pic.urls.raw + "&auto=format&w=1080&h=300&fit=fill&auto=format"}
+                  src={pic.urls.raw + "&auto=format&w=1080&h=300&fit=fill"}
                   alt={pic.description || 'Image'}
                   title={pic.alt_description || 'No description'}
                   className='object-cover'
