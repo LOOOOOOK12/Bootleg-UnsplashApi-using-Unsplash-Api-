@@ -33,7 +33,9 @@ function TopicsGallery({ toggleDarkmode, darkMode }: DarkModeProps) {
                                 description: pic.description || 'No Description',
                                 place: pic.user.location ? pic.user.location.name : 'Unknown',
                                 likes: pic.likes,
-                                color: pic.color
+                                color: pic.color,
+                                userPfp: pic.user.profile_image.small,
+                                user: pic.user.username
                             }}
                         >
                             <img
