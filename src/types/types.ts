@@ -1,6 +1,5 @@
 
 export type NavFunctionProps = {
-    handleSearch?: (value: string) => void;
     topics?: string[];
 };
 
