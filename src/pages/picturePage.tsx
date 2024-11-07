@@ -3,7 +3,7 @@ import NavBar from '../components/nav';
 import { ThumbsUpIcon } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
+function PicturePage({ darkMode, toggleDarkmode }: NavBarProps) {
     const location = useLocation();
     const navigate = useNavigate(); 
     const state = location.state;
@@ -15,20 +15,19 @@ function PicturePage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
 
     const { image, title , description, likes, userPfp, user, forHire} = state;
 
-    const handleSearchAndNavigate = (newQuery: string) => {
-        if (handleSearch) {
-            handleSearch(newQuery);
-            navigate(`/search/${newQuery}`);
-        }
-    };
+    // const handleSearchAndNavigate = (newQuery: string) => {
+    //     if (handleSearch) {
+    //         handleSearch(newQuery);
+    //         navigate(`/search/${newQuery}`);
+    //     }
+    // };
 
     return (
         <div className={`relative bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            <NavBar
+            {/* <NavBar
                 toggleDarkmode={toggleDarkmode}
                 darkMode={darkMode}
-                handleSearch={handleSearchAndNavigate}
-            />
+            /> */}
             <div className={`min-h-full text-lightMode-text bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text flex flex-col gap-3 px-5 py-8`}>
                 <div className='flex gap-2 items-center text-sm'>
                     <img src={userPfp} alt={user} className='rounded-full'/>
