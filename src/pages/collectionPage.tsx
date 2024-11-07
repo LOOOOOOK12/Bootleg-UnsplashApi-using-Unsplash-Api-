@@ -6,24 +6,24 @@ import useGetCollectionPhoto from '@/hooks/useGetCollectionPhoto';
 import { Blurhash } from 'react-blurhash';
 import PageButtons from '@/components/pageButtons';
 import usePage from '@/hooks/usePage';
+import useSearchNavigate from '@/hooks/useSearchNavigate';
 
-function collectionPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
+function collectionPage({ darkMode, toggleDarkmode }: NavBarProps) {
     const location = useLocation();
-    const navigate = useNavigate();
     const { page, handleNextPage, handlePrevPage } = usePage(1);
     const state = location.state;
     const { id, image, title, description, totalPhotos, user, pfp } = state;
-
+    // const { navigatePage } = useSearchNavigate();
     const { isloading, collectionPhotos } = useGetCollectionPhoto(page, id);
 
     console.log(state);
 
-    const handleSearchAndNavigate = (newQuery: string) => {
-        if (handleSearch) {
-            handleSearch(newQuery);
-            navigate(`/search/${newQuery}`);
-        }
-    };
+    // const handleSearchAndNavigate = (newQuery: string) => {
+    //     if (handleSearch) {
+    //         handleSearch(newQuery);
+    //         navigate(`/search/${newQuery}`);
+    //     }
+    // };
     
     if(!state){
         return <div>Error: No collection data available</div>; 
@@ -31,11 +31,10 @@ function collectionPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps)
 
     return (
         <div className={`relative bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            <NavBar
+            {/* <NavBar
                 toggleDarkmode={toggleDarkmode}
                 darkMode={darkMode}
-                handleSearch={handleSearchAndNavigate}
-            />
+            /> */}
             <div className='h-[82vh] flex flex-col overflow-auto items-center gap-3 px-4 py-8 bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text'>
                 <img src={image} alt={title} title={title} className='size-36 object-cover rounded-full'/>
                 <div className='flex flex-col items-center gap-3'>
