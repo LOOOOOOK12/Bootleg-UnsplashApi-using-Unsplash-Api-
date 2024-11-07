@@ -4,33 +4,34 @@ import { Input } from './ui/input';
 import { Image, Moon, Sun } from 'lucide-react';
 import { NavBarProps } from '@/types/types';
 import useGetTopics from '@/hooks/useGetTopics';
+import useSearch from '@/hooks/useSearch';
+import useSearchNavigate from '@/hooks/useSearchNavigate';
 
-function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
-    const [searchQuery, setSearchQuery] = useState<string>('');
+function Nav({ toggleDarkmode, darkMode }: NavBarProps) {
     const { topicsData } = useGetTopics();
+    const { handleSearch, searchQuery, setSearchQuery } = useSearch();
+    // const { navigatePage } = useSearchNavigate();
     console.log(topicsData);
 
     const searchInputRef = useRef<HTMLInputElement>(null);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const location = useLocation();
 
     const onSearchSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        if (handleSearch && searchInputRef.current) {
-            const query = searchInputRef.current.value;
-            if (query) {
-                setSearchQuery(query);  
-                handleSearch(query);   
-                navigate(`/search/${query}`);  
+        // if (searchInputRef.current) {
+            if (searchQuery) {
+                handleSearch(searchQuery);   
+                console.log(searchQuery);
             }
-        }
+        // }
     };
 
-    useEffect(() => {
-        if (searchInputRef.current) {
-            searchInputRef.current.value = searchQuery;
-        }
-    }, [searchQuery, location]);
+    // useEffect(() => {
+    //     if (searchInputRef.current) {
+    //         searchInputRef.current.value = searchQuery;
+    //     }
+    // }, [searchQuery, location]);
 
     return (
         <nav className='sticky z-10 top-0 bg-lightMode-background flex flex-col justify-between border border-x-0 border-t-0 border-b-gray-400 dark:bg-darkMode-colors-background dark:border-b-gray-400 py-2 px-4 gap-2 w-full duration-200'>
@@ -42,9 +43,10 @@ function Nav({ handleSearch, toggleDarkmode, darkMode }: NavBarProps) {
                     <div className='w-1/2'>
                         <form onSubmit={onSearchSubmit}>
                             <Input
-                                ref={searchInputRef}
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search photos and illustrations"
-                                type="search"
+                                type="text"
                                 defaultValue={searchQuery} 
                                 className={`w-full border ${darkMode
                                     ? 'dark:bg-darkMode-colors-background dark:text-darkMode-colors-text dark:border-gray-400'
