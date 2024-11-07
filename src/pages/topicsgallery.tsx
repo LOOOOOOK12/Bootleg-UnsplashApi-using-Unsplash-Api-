@@ -16,7 +16,7 @@ function TopicsGallery({ toggleDarkmode, darkMode }: DarkModeProps) {
 
     return (
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode}/>
+            {/* <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode}/> */}
             <div id="Home" className="max-h-* flex flex-wrap overflow-hidden justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
                 {topicPhotos.map((pic) => 
                 isLoading ? (
