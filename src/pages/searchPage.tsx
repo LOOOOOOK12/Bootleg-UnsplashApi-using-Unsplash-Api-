@@ -7,7 +7,7 @@ import { NavBarProps } from '@/types/types';
 import PageButtons from '@/components/pageButtons';
 import usePage from '@/hooks/usePage';
 
-function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
+function SearchPage({ darkMode, toggleDarkmode}: NavBarProps) {
     const { query } = useParams<{ query: string }>();
     const [searchData, setSearchData] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -31,20 +31,19 @@ function SearchPage({ darkMode, toggleDarkmode, handleSearch }: NavBarProps) {
         fetchSearchResults();
     }, [query, page]);
 
-    const handleSearchAndnavigate = (newQuery: string) => {
-        if(handleSearch) {
-            handleSearch(newQuery);
-            navigate(`/search/${newQuery}`);
-        }
-    }
+    // const handleSearchAndnavigate = (newQuery: string) => {
+    //     if(handleSearch) {
+    //         handleSearch(newQuery);
+    //         navigate(`/search/${newQuery}`);
+    //     }
+    // }
 
     return (
         <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            <NavBar 
+            {/* <NavBar 
                 toggleDarkmode={toggleDarkmode} 
                 darkMode={darkMode} 
-                handleSearch={handleSearchAndnavigate} 
-            />
+            /> */}
             <div className="max-h-full flex flex-wrap overflow-hidden justify-center gap-5 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
                 {isLoading ? (
                     Array(30)
