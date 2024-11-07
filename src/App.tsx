@@ -11,11 +11,11 @@ import './App.css';
 function App({ darkMode, toggleDarkmode }: DarkModeProps ) {
   const { page , handleNextPage, handlePrevPage } = usePage(1);
   const { photosData, isLoading } = useGetPhotos(page);
-  const { handleSearch } = useSearch();
+  // const { handleSearch } = useSearch();
 
   return (
     <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-      <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode}/>
+      <NavBar toggleDarkmode={toggleDarkmode} darkMode={darkMode}/>
       <div id="Home" className="flex flex-wrap justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
         {photosData.map((pic) =>
           isLoading ? (
