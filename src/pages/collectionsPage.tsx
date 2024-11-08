@@ -1,20 +1,16 @@
 import PageButtons from '@/components/pageButtons'
 import { DarkModeProps } from '@/types/types';
-import NavBar from '../components/nav';
 import { Link } from 'react-router-dom';
 import usePage from '@/hooks/usePage';
-import useSearch from '@/hooks/useSearch.ts';
 import useGetCollection from '@/hooks/useGetCollection';
 import { Blurhash } from 'react-blurhash';
 
-function collectionPage({darkMode, toggleDarkmode}: DarkModeProps) {
+function collectionPage({darkMode}: DarkModeProps) {
     const { page, handleNextPage, handlePrevPage} = usePage(1);
     const { collectionsData, isLoading} = useGetCollection(page);
-    const { handleSearch } = useSearch();
 
     return (
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            {/* <NavBar toggleDarkmode={toggleDarkmode} darkMode={darkMode}/> */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 overflow-hidden justify-center gap-7 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
                 {collectionsData.map((collection,idx) =>
                 isLoading ? (
