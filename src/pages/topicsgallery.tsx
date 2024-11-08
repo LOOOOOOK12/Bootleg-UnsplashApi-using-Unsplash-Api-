@@ -1,5 +1,4 @@
 import { Link, useParams } from 'react-router-dom';
-import NavBar from '../components/nav';
 import PageButtons from '@/components/pageButtons';
 import { DarkModeProps } from '@/types/types'; 
 import useGetTopicPhotos from '@/hooks/useGetTopicPhotos';
@@ -7,16 +6,14 @@ import usePage from '@/hooks/usePage';
 import useSearch from '@/hooks/useSearch';
 import { Blurhash } from 'react-blurhash';
 
-function TopicsGallery({ toggleDarkmode, darkMode }: DarkModeProps) {
+function TopicsGallery({ darkMode }: DarkModeProps) {
     const { page, handleNextPage, handlePrevPage } = usePage(1);
-    const { handleSearch } = useSearch();
     const { slug } = useParams<{ slug: string }>();
     
     const { topicPhotos, isLoading } = useGetTopicPhotos(page, slug);
 
     return (
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            {/* <NavBar handleSearch={handleSearch} toggleDarkmode={toggleDarkmode} darkMode={darkMode}/> */}
             <div id="Home" className="max-h-* flex flex-wrap overflow-hidden justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
                 {topicPhotos.map((pic) => 
                 isLoading ? (
