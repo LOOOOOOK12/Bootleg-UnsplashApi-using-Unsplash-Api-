@@ -27,7 +27,7 @@ function mainpage({ darkMode }: DarkModeProps) {
                 key={pic.id}
                 to={`/photo/${pic.id}`}
                 state={{
-                    image: pic.urls.raw + "w=9000&dpr=2",
+                    image: pic.urls.regular,
                     title: pic.alt_description,
                     description: pic.description || "No description",
                     place: pic.location ? pic.location.name : "Unknown",
