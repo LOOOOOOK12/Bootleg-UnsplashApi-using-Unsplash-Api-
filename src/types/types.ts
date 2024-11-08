@@ -1,6 +1,7 @@
 
 export type NavFunctionProps = {
     topics?: string[];
+    children?: React.ReactNode;
 };
 
 export type DarkModeProps = {
