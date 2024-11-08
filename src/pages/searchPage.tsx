@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import * as PictureApi from '../api/pictureApi';
 import { Skeleton } from '../components/ui/skeleton';
-import NavBar from '../components/nav';
 import { NavBarProps } from '@/types/types';
 import PageButtons from '@/components/pageButtons';
 import usePage from '@/hooks/usePage';
 
-function SearchPage({ darkMode, toggleDarkmode}: NavBarProps) {
+function SearchPage({ darkMode }: NavBarProps) {
     const { query } = useParams<{ query: string }>();
     const [searchData, setSearchData] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const { page, handleNextPage, handlePrevPage} = usePage(1);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchSearchResults = async () => {
@@ -31,19 +29,8 @@ function SearchPage({ darkMode, toggleDarkmode}: NavBarProps) {
         fetchSearchResults();
     }, [query, page]);
 
-    // const handleSearchAndnavigate = (newQuery: string) => {
-    //     if(handleSearch) {
-    //         handleSearch(newQuery);
-    //         navigate(`/search/${newQuery}`);
-    //     }
-    // }
-
     return (
         <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            {/* <NavBar 
-                toggleDarkmode={toggleDarkmode} 
-                darkMode={darkMode} 
-            /> */}
             <div className="max-h-full flex flex-wrap overflow-hidden justify-center gap-5 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
                 {isLoading ? (
                     Array(30)
