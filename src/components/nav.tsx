@@ -8,11 +8,9 @@ import useSearch from "@/hooks/useSearch";
 function Nav({ toggleDarkmode, darkMode }: NavBarProps) {
     const { topicsData } = useGetTopics();
     const { handleSearch, searchQuery, setSearchQuery } = useSearch();
-    console.log(topicsData);
 
     const onSearchSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-
         if (searchQuery) {
         handleSearch(searchQuery);
         console.log(searchQuery);
