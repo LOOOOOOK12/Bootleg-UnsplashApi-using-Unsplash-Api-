@@ -22,6 +22,28 @@ export async function getPhotos(page?: Number) {
     }
 }
 
+export async function getPhoto(id:string){
+    const url = `https://api.unsplash.com/photos/${id}`;
+    const options = {
+        method: 'GET',
+        headers: {
+            "cache-control": "public, max-age=1000",
+            Authorization: Auth,
+        }
+    }
+
+    try {
+        const response = await fetch(url, options)
+        if(!response.ok){
+            throw new Error(`Error: ${response.status}`);
+        }
+        const result = response.json();
+        return result;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export async function getTopics() {
     const url = `https://api.unsplash.com/topics?page=1&per_page=5&order_by=featured`;
     const options = {
