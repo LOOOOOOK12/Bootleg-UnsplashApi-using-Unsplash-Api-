@@ -3,7 +3,7 @@ import { CircleUserRound, ThumbsUpIcon } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 
 
-function PicturePage({ darkMode}: NavBarProps) {
+function PicturePage({ darkMode }: NavBarProps) {
     const location = useLocation();
     const state = location.state;
     console.log(state);
@@ -12,7 +12,7 @@ function PicturePage({ darkMode}: NavBarProps) {
         return <div>Error: No picture data available</div>; 
     }
 
-    const { image, title , description, likes, userPfp, user, forHire} = state;
+    const { image, title , description, likes, userPfp, user, forHire, camera} = state;
 
     return (
         <div className={`relative bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
@@ -30,6 +30,7 @@ function PicturePage({ darkMode}: NavBarProps) {
                         {title ? <p>{title}</p> : <p>No title available</p>}
                         { description ? <p>{description}</p> : <p>No description available</p>}
                         <p className='flex gap-2'><ThumbsUpIcon/>{likes}</p>
+                        <p>{camera}</p>
                     </div>
                 </div>
             </div>
