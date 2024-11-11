@@ -16,7 +16,6 @@ export type PageButtonFunctionProps = {
 
 //mainpage
 export type PictureProps = {
-    picturePageData: PicturePageProps[];
     isLoading: boolean;
     routes: Routes;
 }
@@ -30,24 +29,7 @@ export type PhotoGalleryProps = {
     alt: string;
     link: string;
 }
-//mainpage
 
-export type PicturePageProps = {
-    id: string;
-    image: string;
-    imageDescription: string;
-    place: string;
-    color: string;
-    likes: number;
-};
-
-export type CollectionPageProps = {
-    image: string;
-    title: string;
-    description: string;
-    totalPhotos: number;
-    user: string;
-}
 
 export type PageButtonProps = PageButtonFunctionProps & DarkModeProps;
 
