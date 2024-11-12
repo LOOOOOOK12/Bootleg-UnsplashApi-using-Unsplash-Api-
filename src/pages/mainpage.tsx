@@ -25,16 +25,9 @@ function mainpage({ darkMode }: DarkModeProps) {
                 ) : (
                     <Link
                     key={pic.id}
-                    to={`/photo/${pic.id}`}
+                    to={`/photos/${pic.id}`}
                     state={{
-                        image: pic.urls.regular,
-                        title: pic.alt_description,
-                        description: pic.description || "No description",
-                        place: pic.location ? pic.location.name : "Unknown",
-                        likes: pic.likes || "0",
-                        userPfp: pic.user.profile_image.small,
-                        user: pic.user.username,
-                        forHire: pic.for_hire,
+                        id: pic.id
                     }}
                     >
                     <div className="relative">
