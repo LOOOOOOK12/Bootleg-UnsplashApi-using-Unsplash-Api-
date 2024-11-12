@@ -38,7 +38,7 @@ function collectionPage({ darkMode }: NavBarProps) {
                                 />
                             ) : (
                                 <Link
-                                    to={`/photo/${pic.id}`}
+                                    to={`/photos/${pic.id}`}
                                     state={{
                                         image:pic.urls.regular,
                                     }}
