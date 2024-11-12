@@ -11,7 +11,6 @@ export default function useGetPhotos( page: number = 1) {
                 setIsLoading(true);
                 const result = await PictureApi.getPhotos(page);
                 setPhotosData(result);
-                console.log(result);
             } catch (error) {
                 console.log(error);
             }
