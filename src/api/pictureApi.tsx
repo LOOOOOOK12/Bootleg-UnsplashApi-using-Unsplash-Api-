@@ -22,12 +22,11 @@ export async function getPhotos(page?: Number) {
     }
 }
 
-export async function getPhoto(id:string){
+export async function getPhoto(id:any){
     const url = `https://api.unsplash.com/photos/${id}`;
     const options = {
         method: 'GET',
         headers: {
-            "cache-control": "public, max-age=1000",
             Authorization: Auth,
         }
     }
@@ -78,7 +77,6 @@ export async function getTopicPhotos(page: Number = 1, slug?: string) {
             throw new Error(`Error: ${response.status}`);
         }
         const result = response.json();
-        console.log(result)
         return result;
     } catch (error) {
         console.log(error)
@@ -113,7 +111,6 @@ export async function getCollections(page: Number = 1){
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result);
         return result;
     } catch (error) {
         console.log(error);
@@ -134,7 +131,6 @@ export async function getCollectionPhotos(page: Number = 1, id?: any) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const result = await response.json();
-        console.log(result);
         return result;
     } catch (error) {
         console.log(error);
