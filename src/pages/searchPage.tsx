@@ -42,13 +42,9 @@ function SearchPage({ darkMode }: NavBarProps) {
                         />
                     ) : ( <Link
                         key={searchPic.id}
-                        to={`/photo/${searchPic.id}`}
+                        to={`/photos/${searchPic.id}`}
                         state={{
-                            image: searchPic.urls.regular,
-                            imageDescription: searchPic.alt_description,
-                            place: searchPic.location ? searchPic.location.name : 'Unknown',
-                            color: searchPic.color,
-                            likes: searchPic.likes || "0"
+                            id: searchPic.id,
                         }}
                     >
                         <img
