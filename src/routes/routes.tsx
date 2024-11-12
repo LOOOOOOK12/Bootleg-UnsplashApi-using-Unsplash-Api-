@@ -19,7 +19,7 @@ function routes({ darkMode, toggleDarkmode }: NavBarProps) {
       ),
     },
     {
-      path: "/photo/:pictureId",
+      path: "/photos/:pictureId",
       element: (
         <Layout darkMode={darkMode} toggleDarkmode={toggleDarkmode}>
           <PicturePage darkMode={darkMode} toggleDarkmode={toggleDarkmode} />
