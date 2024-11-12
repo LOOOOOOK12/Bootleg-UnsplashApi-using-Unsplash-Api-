@@ -26,16 +26,9 @@ function TopicsGallery({ darkMode }: DarkModeProps) {
                 ):(
                         <Link
                             key={pic.id}
-                            to={`/photo/${pic.id}`}
+                            to={`/photos/${pic.id}`}
                             state={{
-                                image: pic.urls.regular,
-                                title: pic.alt_description,
-                                description: pic.description || 'No Description',
-                                place: pic.user.location ? pic.user.location.name : 'Unknown',
-                                likes: pic.likes,
-                                color: pic.color,
-                                userPfp: pic.user.profile_image.small,
-                                user: pic.user.username
+                                id: pic.id,
                             }}
                         >
                             <img
