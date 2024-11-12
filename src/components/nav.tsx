@@ -61,7 +61,7 @@ function Nav({ toggleDarkmode, darkMode }: NavBarProps) {
             ))}
             <Link
                 to={`/collections`}
-                className={` border ${darkMode ? " dark:text-darkMode-colors-text dark:hover:bg-gray-700" : "text-lightMode-text hover:bg-gray-200 duration-200"} border-gray-400 rounded-sm px-4 py-2`}
+                className={`border ${darkMode ? " dark:text-darkMode-colors-text dark:hover:bg-gray-700" : "text-lightMode-text hover:bg-gray-200 duration-200"} border-gray-400 rounded-sm px-4 py-2`}
             >
                 Collections
             </Link>
