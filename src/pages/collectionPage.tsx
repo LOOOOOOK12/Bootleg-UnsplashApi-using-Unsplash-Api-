@@ -16,7 +16,7 @@ function collectionPage({ darkMode }: NavBarProps) {
     console.log(state);
     
     if(!state){
-        return <div>Error: No collection data available</div>; 
+        return <div className='h-screen items-center justify-center'>Error: No collection data available</div>; 
     }
 
     return (
