@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { NavBarProps } from "@/types/types";
-import { CircleUserRound, ThumbsUpIcon } from "lucide-react";
+import { CircleUserRound, ThumbsUpIcon, Camera } from "lucide-react";
 import useGetPhoto from "@/hooks/useGetPhoto";
 import useSearch from "@/hooks/useSearch";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -15,18 +15,22 @@ function PicturePage({ darkMode }: NavBarProps) {
         <div className={`relative bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? "dark" : ""}`}>
             <div className={`min-h-screen text-lightMode-text bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text flex flex-col items-center gap-4 px-5 py-8`}>
                 {!photoData ? (
-                    <div className="w-full">
-                        <div className="gap-2 items-center">
-                            <Skeleton className="size-14 rounded-full"/>
-                            <Skeleton className="w-56"/>
-                            <Skeleton className="w-56"/>
+                    <>
+                        <div className="w-full">
+                            <div className="flex gap-2 items-center">
+                                <Skeleton className="size-6 rounded-full"/>
+                                <div className="flex flex-col gap-2">
+                                    <Skeleton className="w-24 h-2 rounded-sm"/> 
+                                    <Skeleton className="w-16 h-2 rounded-sm"/>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <Skeleton className="h-80 w-60 object-cover items-center"/>
+                    </>
                 ) : (
                     <>
                         <div className="w-full">
                             <div className="flex gap-2 items-center text-sm">
-                                    <>
                                         {photoData.user.profile_image ? (
                                             <img src={photoData.user.profile_image.small} alt={photoData.username} className="rounded-full"/>
                                         ) : (
@@ -38,17 +42,40 @@ function PicturePage({ darkMode }: NavBarProps) {
                                                 {photoData.user.for_hire ? "For Hire" : "Not Available"}
                                             </p>
                                         </div>
-                                    </>
                                 </div>
                             </div>
                             <img src={photoData.urls.regular} alt={photoData.alt_description} className="h-96 w-60 object-cover"/>
                         <div className="w-full flex flex-col items-start gap-4">
-                            <div className="flex flex-col gap-2">
-                                <p>{photoData.description ? photoData.description : "No Description Available"}</p>
-                                <p className="flex gap-2">
-                                    <ThumbsUpIcon/>
-                                    {photoData.likes}
-                                </p>
+                            <div className="w-full flex flex-col gap-3 md:flex-row">
+                                <div className="w-full flex flex-col gap-2 border border-gray-400 rounded-sm p-2">
+                                    <h1>{photoData.description ? photoData.description : photoData.alt_description}</h1>
+                                    <span className="flex gap-2 items-center">
+                                        <span title="Total of Likes"><ThumbsUpIcon size={20}/></span>
+                                        {photoData.likes}
+                                    </span>
+                                    <h1>Published in:   
+                                        {new Date(photoData.updated_at).toLocaleDateString("en-US", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric"
+                                        })}
+                                    </h1>
+                                </div>
+                                <div className="w-full flex flex-col gap-2 border border-gray-400 rounded-sm p-2">
+                                    <span title="Camera model" className="flex gap-2">
+                                        <Camera/>
+                                        {photoData.exif?.model && photoData.exif?.name && photoData.exif?.make ? (
+                                        <p>{`${photoData.exif.model}, ${photoData.exif.name}, ${photoData.exif.make}`}</p>
+                                        ) : (
+                                            <p>no description</p>
+                                        )}
+                                    </span>
+                                    <span className="flex gap-2"> 
+                                        <span className="flex-col">
+                                            <h1>Lens: {photoData.exif.aperture}, {photoData.exif.exposure_time}, {photoData.exif.focal_length}, {photoData.exif.iso}</h1>
+                                        </span>
+                                    </span>
+                                </div>
                             </div>
                             <div className="flex flex-col gap-2 w-full">
                                 <h1>Tags:</h1>
