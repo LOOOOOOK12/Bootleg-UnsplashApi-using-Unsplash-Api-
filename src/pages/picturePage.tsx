@@ -18,7 +18,7 @@ function PicturePage({ darkMode }: NavBarProps) {
                     <>
                         <div className="w-full">
                             <div className="flex gap-2 items-center">
-                                <Skeleton className="size-6 rounded-full"/>
+                                <Skeleton className="size-24 rounded-full"/>
                                 <div className="flex flex-col gap-2">
                                     <Skeleton className="w-24 h-2 rounded-sm"/> 
                                     <Skeleton className="w-16 h-2 rounded-sm"/>
@@ -26,6 +26,10 @@ function PicturePage({ darkMode }: NavBarProps) {
                             </div>
                         </div>
                         <Skeleton className="h-80 w-60 object-cover items-center"/>
+                        <div className="w-full flex flex-col gap-3 md:flex-row">
+                            <Skeleton className="w-full h-60"/>
+                            <Skeleton className="w-full h-60"/>
+                        </div>
                     </>
                 ) : (
                     <>
