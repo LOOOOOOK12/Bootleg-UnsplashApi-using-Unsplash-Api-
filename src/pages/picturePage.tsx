@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { NavBarProps } from "@/types/types";
-import { CircleUserRound, ThumbsUpIcon, Camera } from "lucide-react";
+import { CircleUserRound, ThumbsUpIcon, Camera, Download } from "lucide-react";
 import useGetPhoto from "@/hooks/useGetPhoto";
 import useSearch from "@/hooks/useSearch";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -18,7 +18,7 @@ function PicturePage({ darkMode }: NavBarProps) {
                     <>
                         <div className="w-full">
                             <div className="flex gap-2 items-center">
-                                <Skeleton className="size-24 rounded-full"/>
+                                <Skeleton className="size-11 rounded-full"/>
                                 <div className="flex flex-col gap-2">
                                     <Skeleton className="w-24 h-2 rounded-sm"/> 
                                     <Skeleton className="w-16 h-2 rounded-sm"/>
@@ -27,8 +27,8 @@ function PicturePage({ darkMode }: NavBarProps) {
                         </div>
                         <Skeleton className="h-80 w-60 object-cover items-center"/>
                         <div className="w-full flex flex-col gap-3 md:flex-row">
-                            <Skeleton className="w-full h-60"/>
-                            <Skeleton className="w-full h-60"/>
+                            <Skeleton className="w-full h-40"/>
+                            <Skeleton className="w-full h-40"/>
                         </div>
                     </>
                 ) : (
@@ -64,6 +64,10 @@ function PicturePage({ darkMode }: NavBarProps) {
                                         day: "numeric"
                                         })}
                                     </h1>
+                                    <span className="flex gap-2 items-center">
+                                        <span title="Total Downloads"><Download/></span>
+                                        {photoData.downloads}
+                                    </span>
                                 </div>
                                 <div className="w-full flex flex-col gap-2 border border-gray-400 rounded-sm p-2">
                                     <span title="Camera model" className="flex gap-2">
@@ -71,12 +75,12 @@ function PicturePage({ darkMode }: NavBarProps) {
                                         {photoData.exif?.model && photoData.exif?.name && photoData.exif?.make ? (
                                         <p>{`${photoData.exif.model}, ${photoData.exif.name}, ${photoData.exif.make}`}</p>
                                         ) : (
-                                            <p>no description</p>
+                                            <p>Not Available</p>
                                         )}
                                     </span>
                                     <span className="flex gap-2"> 
                                         <span className="flex-col">
-                                            <h1>Lens: {photoData.exif.aperture}, {photoData.exif.exposure_time}, {photoData.exif.focal_length}, {photoData.exif.iso}</h1>
+                                            <h1>Lens: {photoData.exif.aperture ?? "N/A"}, {photoData.exif.exposure_time ?? "N/A"}, {photoData.exif.focal_length ?? "N/A"}, {photoData.exif.iso ?? "N/A"}</h1>
                                         </span>
                                     </span>
                                 </div>
