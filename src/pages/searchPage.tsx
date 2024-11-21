@@ -5,6 +5,7 @@ import { NavBarProps } from '@/types/types';
 import PageButtons from '@/components/pageButtons';
 import usePage from '@/hooks/usePage';
 import { Blurhash } from 'react-blurhash';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function SearchPage({ darkMode }: NavBarProps) {
     const { query } = useParams<{ query: string }>();
@@ -32,14 +33,9 @@ function SearchPage({ darkMode }: NavBarProps) {
     return (
         <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <div className="max-h-full flex flex-wrap overflow-hidden justify-center gap-5 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
-                { searchData.map((searchPic) =>
+                {searchData.map((searchPic) =>
                     isLoading ? (
-                        <Blurhash
-                            hash={searchPic.blur_hash}
-                            width={300}
-                            height={250}
-                            punch={1}
-                        />
+                        <Skeleton className='h-40 w-60'/>
                     ) : ( <Link
                         key={searchPic.id}
                         to={`/photos/${searchPic.id}`}
