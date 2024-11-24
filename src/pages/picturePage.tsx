@@ -97,6 +97,12 @@ function PicturePage({ darkMode }: NavBarProps) {
                                         </button>
                                     ))}
                                 </div>
+                            </div>
+                            <div>
+                                <h1>Related Images</h1>
+                                <div className="flex flex-wrap justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200">
+                                    
+                                </div>
                             </div>                          
                         </div>
                     </>    
