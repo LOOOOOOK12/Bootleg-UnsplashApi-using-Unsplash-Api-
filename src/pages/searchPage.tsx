@@ -4,36 +4,32 @@ import * as PictureApi from '../api/pictureApi';
 import { NavBarProps } from '@/types/types';
 import PageButtons from '@/components/pageButtons';
 import usePage from '@/hooks/usePage';
-import { Blurhash } from 'react-blurhash';
 import { Skeleton } from '@/components/ui/skeleton';
+import useSearch from '@/hooks/useSearch';
 
 function SearchPage({ darkMode }: NavBarProps) {
     const { query } = useParams<{ query: string }>();
-    const [searchData, setSearchData] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const { page, handleNextPage, handlePrevPage} = usePage(1);
+    const { fetchSearchResults, searchResultsData } = useSearch();
 
     useEffect(() => {
-        const fetchSearchResults = async () => {
             if (query) {
                 try {
                     setIsLoading(true);
-                    const result = await PictureApi.searchPictures(query, page);
-                    setSearchData(result);
+                    fetchSearchResults(query, page);
                 } catch (error) {
                     console.log("Error fetching search results:", error);
                 } finally {
                     setIsLoading(false);
                 }
-            }
         };
-        fetchSearchResults();
     }, [query, page]);
 
     return (
         <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <div className="max-h-full flex flex-wrap overflow-hidden justify-center gap-5 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
-                {searchData.map((searchPic) =>
+                {searchResultsData.map((searchPic) =>
                     isLoading ? (
                         <Skeleton className='h-40 w-60'/>
                     ) : ( <Link
