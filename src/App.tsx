@@ -10,7 +10,7 @@ function App() {
   };
 
   return (
-    <div className="relative">
+    <div className={`relative ${darkMode ? `bg-darkMode-colors-background`:`bg-lightMode-background`}`} >
       <Routes toggleDarkmode={toggleDarkmode} darkMode={darkMode} />
     </div>
   );
