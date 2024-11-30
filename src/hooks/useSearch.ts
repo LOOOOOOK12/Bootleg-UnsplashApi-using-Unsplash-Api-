@@ -15,7 +15,7 @@ export default function useSearch(){
             }
     }
     
-    const fetchSearchResults = async (query:string, page: Number) => {
+    const fetchSearchResults = async (query:string, page?: Number) => {
         try {
             const result = await PictureApi.searchPictures(query,page);
             setSearchResultsData(result);
