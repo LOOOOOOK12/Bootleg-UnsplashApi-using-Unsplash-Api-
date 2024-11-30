@@ -44,7 +44,7 @@ function SearchPage({ darkMode }: NavBarProps) {
                             src={searchPic.urls.regular}
                             alt={searchPic.alt_description || 'Image'}
                             title={searchPic.description || 'No description'}
-                            className="w-full h-80 grow"
+                            className="w-full h-80 object-cover"
                         />
                     </Link>)
                 )}
