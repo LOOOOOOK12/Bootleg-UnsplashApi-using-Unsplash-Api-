@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import usePage from "@/hooks/usePage";
 import useGetCollection from "@/hooks/useGetCollection";
 import { Blurhash } from "react-blurhash";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function collectionPage({ darkMode }: DarkModeProps) {
     const { page, handleNextPage, handlePrevPage } = usePage(1);
@@ -18,11 +19,7 @@ function collectionPage({ darkMode }: DarkModeProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center gap-7 py-8 px-5 dark:bg-darkMode-colors-background">
             {collectionsData.map((collection, idx) =>
                 isLoading ? (
-                    <Blurhash
-                        hash={collection.blur_hash}
-                        width={300}
-                        height={250}
-                        punch={1}
+                    <Skeleton className="h-96 w-60"
                     />
                 ) : (
                 <Link
