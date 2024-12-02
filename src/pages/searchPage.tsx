@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import * as PictureApi from '../api/pictureApi';
 import { NavBarProps } from '@/types/types';
 import PageButtons from '@/components/pageButtons';
 import usePage from '@/hooks/usePage';
