@@ -43,7 +43,14 @@ function PicturePage({ darkMode }: NavBarProps) {
                         <div className="w-full">
                             <div className="flex gap-2 items-center text-sm">
                                         {photoData.user.profile_image ? (
-                                            <img src={photoData.user.profile_image.small} alt={photoData.username} className="rounded-full"/>
+                                            <Link
+                                                to={`/users/${photoData.user.username}`}
+                                                state={{
+                                                    username: photoData.user.username
+                                                }}
+                                            >
+                                                <img src={photoData.user.profile_image.small} alt={photoData.username} className="rounded-full"/>
+                                            </Link>
                                         ) : (
                                             <CircleUserRound />
                                         )}
