@@ -3,8 +3,7 @@ import PageButtons from '@/components/pageButtons';
 import { DarkModeProps } from '@/types/types'; 
 import useGetTopicPhotos from '@/hooks/useGetTopicPhotos';
 import usePage from '@/hooks/usePage';
-import useSearch from '@/hooks/useSearch';
-import { Blurhash } from 'react-blurhash';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function TopicsGallery({ darkMode }: DarkModeProps) {
     const { page, handleNextPage, handlePrevPage } = usePage(1);
@@ -17,12 +16,7 @@ function TopicsGallery({ darkMode }: DarkModeProps) {
             <div id="Home" className="max-h-* flex flex-wrap overflow-hidden justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
                 {topicPhotos.map((pic) => 
                 isLoading ? (
-                    <Blurhash
-                        hash={pic.blur_hash}
-                        width={300}
-                        height={250}
-                        punch={1}
-                    />
+                    <Skeleton className="w-64 h-80" />
                 ):(
                         <Link
                             key={pic.id}
