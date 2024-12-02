@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as PictureApi from '../api/pictureApi';
 
-export default function useGetCollectionPhoto(page: Number = 1 , id?: any){
+export default function useGetCollectionPhoto(page: Number = 1 , id?:any){
     const [ collectionPhotos, setCollectionPhotos ] = useState<any[]>([]);
     const [ isloading, setIsLoading ] = useState<boolean>(false);
 
