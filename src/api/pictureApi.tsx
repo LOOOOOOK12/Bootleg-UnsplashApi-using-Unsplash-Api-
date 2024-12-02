@@ -136,3 +136,24 @@ export async function getCollectionPhotos(page: Number = 1, id?: any) {
         console.log(error);
     }
 }
+
+export async function getUser( userName?:any ) {
+    const url = `https://api.unsplash.com/users/${userName}`
+    const options = {
+        method: 'GET',
+        headers: {
+            Authorization: Auth,
+        }
+    }
+
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
