@@ -5,6 +5,7 @@ import SearchPage from "../pages/searchPage.tsx";
 import CollectionsPage from "../pages/collectionsPage.tsx";
 import CollectionPage from "../pages/collectionPage.tsx";
 import Topicsgallery from "../pages/topicsgallery.tsx";
+import UserPage from "../pages/UserPage.tsx";
 import Layout from "../layout/Layout";
 import { NavBarProps } from "@/types/types.ts";
 
@@ -55,6 +56,14 @@ function routes({ darkMode, toggleDarkmode }: NavBarProps) {
       element: (
         <Layout darkMode={darkMode} toggleDarkmode={toggleDarkmode}>
           <Topicsgallery darkMode={darkMode} toggleDarkmode={toggleDarkmode} />
+        </Layout>
+      ),
+    },
+    {
+      path:"/users/:username",
+      element: (
+        <Layout darkMode={darkMode} toggleDarkmode={toggleDarkmode}>
+          <UserPage darkMode={darkMode} toggleDarkmode={toggleDarkmode} />
         </Layout>
       ),
     },
