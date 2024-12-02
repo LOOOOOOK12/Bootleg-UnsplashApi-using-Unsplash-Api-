@@ -3,7 +3,6 @@ import { DarkModeProps } from "@/types/types";
 import { Link } from "react-router-dom";
 import usePage from "@/hooks/usePage";
 import useGetCollection from "@/hooks/useGetCollection";
-import { Blurhash } from "react-blurhash";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function collectionPage({ darkMode }: DarkModeProps) {
