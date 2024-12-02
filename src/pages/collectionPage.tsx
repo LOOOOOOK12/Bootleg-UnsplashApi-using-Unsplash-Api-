@@ -2,9 +2,9 @@ import { useLocation, Link } from 'react-router-dom'
 import { NavBarProps } from '@/types/types'
 import { CircleUserRound } from 'lucide-react';
 import useGetCollectionPhoto from '@/hooks/useGetCollectionPhoto';
-import { Blurhash } from 'react-blurhash';
 import PageButtons from '@/components/pageButtons';
 import usePage from '@/hooks/usePage';
+import { Skeleton } from '@/components/ui/skeleton';
 
 function collectionPage({ darkMode }: NavBarProps) {
     const location = useLocation();
@@ -28,14 +28,12 @@ function collectionPage({ darkMode }: NavBarProps) {
                     <h2 className='flex gap-2 items-center text-xl'>{pfp? <img src={pfp} alt={user} className='rounded-full'/> : <CircleUserRound/> } {user}</h2>
                     <h3 className='text-xl'>{description}</h3>
                 </div>
-                <div className='w-full h-full flex flex-col '>
-                    <p className='items-start'>Photos: {totalPhotos}</p>
+                <div className='w-full h-full flex flex-col gap-3 '>
+                    <h1 className='items-start font-normal'>Photos: {totalPhotos}</h1>
                     <div className='flex flex-wrap justify-center gap-2'>
                         {collectionPhotos.map((pic) => 
                             isloading ? (
-                                <Blurhash
-                                    hash={pic.blur_hash}
-                                />
+                                <Skeleton className='w-64 h-80'/>
                             ) : (
                                 <Link
                                     to={`/photos/${pic.id}`}
