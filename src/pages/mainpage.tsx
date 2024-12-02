@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { Blurhash } from "react-blurhash";
 import { DarkModeProps } from "@/types/types.ts";
 import PageButtons from "@/components/pageButtons.tsx";
 import usePage from "../hooks/usePage.ts";
 import useGetPhotos from "../hooks/useGetPhotos.ts";
+import { Skeleton } from "@/components/ui/skeleton.tsx";
 
 function mainpage({ darkMode }: DarkModeProps) {
     const { page , handleNextPage, handlePrevPage } = usePage(1);
@@ -21,14 +21,11 @@ function mainpage({ darkMode }: DarkModeProps) {
         >
             {photosData.map((pic) =>
                 isLoading ? (
-                    <Blurhash hash={pic.blur_hash} punch={1} />
+                    <Skeleton className="w-64 h-80" />
                 ) : (
                     <Link
                     key={pic.id}
                     to={`/photos/${pic.id}`}
-                    state={{
-                        id: pic.id
-                    }}
                     >
                     <div className="relative">
                         <img
