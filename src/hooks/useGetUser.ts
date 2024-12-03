@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import * as PictureApi from '../api/pictureApi';
 
-export default function useGetUser( userName:any ){
+export default function useGetUser( username:any ){
     const [ userInfo, setUserInfo ] = useState<any>(null);
     const [ isLoading, setIsLoading ] = useState<boolean>(false);
 
     const fetchUser = async () => {
         try {
-            const result = await PictureApi.getUser(userName);
+            const result = await PictureApi.getUser(username);
             setUserInfo(result);
         } catch (error) {
             console.log(error)
@@ -19,7 +19,7 @@ export default function useGetUser( userName:any ){
 
     useEffect(()=>{
         fetchUser();
-    },[userName]);
+    },[username]);
 
     return { userInfo, isLoading };
 }
