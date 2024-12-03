@@ -22,7 +22,9 @@ function collectionPage({ darkMode }: NavBarProps) {
     return (
         <div className={`relative bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <div className='h-screen flex flex-col overflow-auto items-center gap-3 px-4 py-8 bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text'>
-                <img src={image} alt={title} title={title} className='size-36 object-cover rounded-full'/>
+                <div className="h-40 w-56 rounded-full">
+                    <img src={image} alt={title} title={title} className='h-full object-cover rounded-full'/>
+                </div>
                 <div className='flex flex-col items-center gap-3'>
                     <h1 className='font-bold text-5xl'>{title}</h1>
                     <h2 className='flex gap-2 items-center text-xl'>{pfp? <img src={pfp} alt={user} className='rounded-full'/> : <CircleUserRound/> } {user}</h2>
