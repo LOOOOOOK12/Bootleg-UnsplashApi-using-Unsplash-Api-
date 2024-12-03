@@ -20,7 +20,7 @@ function PicturePage({ darkMode }: NavBarProps) {
 
     return (
         <div className={`relative bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? "dark" : ""}`}>
-            <div className={`min-h-screen text-lightMode-text bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text flex flex-col items-center gap-4 px-5 py-8`}>
+            <div className={`text-lightMode-text bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text flex flex-col items-center gap-4 px-5 py-8`}>
                 {!photoData ? (
                     <>
                         <div className="w-full">
@@ -62,7 +62,7 @@ function PicturePage({ darkMode }: NavBarProps) {
                                         </div>
                                 </div>
                             </div>
-                            <img src={photoData.urls.regular} alt={photoData.alt_description} className="h-96 w-60 object-cover"/>
+                            <img src={photoData.urls.regular} alt={photoData.alt_description} className="h-96 object-cover"/>
                         <div className="w-full flex flex-col items-start gap-4">
                             <div className="w-full flex flex-col gap-3 md:flex-row">
                                 <div className="w-full flex flex-col gap-2 border border-gray-400 rounded-sm p-2">
@@ -110,7 +110,7 @@ function PicturePage({ darkMode }: NavBarProps) {
                                     </span>
                                 </div>
                             </div>
-                            <div className="flex flex-col gap-2 w-full">
+                            <div className="flex flex-col gap-2 w-full bg-lightMode-background dark:bg-darkMode-colors-background">
                                 <h1>Tags:</h1>
                                 <div className="flex flex-wrap gap-2">
                                     {photoData.tags.map((tag:any) => (
@@ -123,7 +123,7 @@ function PicturePage({ darkMode }: NavBarProps) {
                                     ))}
                                 </div>
                             </div>
-                            <div className="flex flex-col w-full gap-2">
+                            <div className="flex flex-col w-full gap-2 bg-lightMode-background dark:bg-darkMode-colors-background">
                                 <h1>Related Images</h1>
                                 <div className="flex flex-wrap justify-center gap-3 dark:bg-darkMode-colors-background duration-200">
                                     {searchResultsData.map((relPic) =>(
