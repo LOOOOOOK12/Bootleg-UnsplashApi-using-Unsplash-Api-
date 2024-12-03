@@ -137,8 +137,8 @@ export async function getCollectionPhotos(page: Number = 1, id?: any) {
     }
 }
 
-export async function getUser( userName?:any ) {
-    const url = `https://api.unsplash.com/users/${userName}`
+export async function getUser( username?:string ) {
+    const url = `https://api.unsplash.com/users/${username}`
     const options = {
         method: 'GET',
         headers: {
