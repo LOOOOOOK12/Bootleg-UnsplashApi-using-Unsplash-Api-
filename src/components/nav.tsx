@@ -7,7 +7,6 @@ import useGetTopics from "@/hooks/useGetTopics";
 import useSearch from "@/hooks/useSearch";
 import 'swiper/css';
 import 'swiper/css/free-mode';
-import { FreeMode } from "swiper/modules";
 
 function Nav({ toggleDarkmode, darkMode }: NavBarProps) {
     const { topicsData } = useGetTopics();
@@ -22,7 +21,7 @@ function Nav({ toggleDarkmode, darkMode }: NavBarProps) {
     };
 
     return (
-        <nav className={`sticky z-10 top-0 ${darkMode ?"bg-darkMode-colors-background border-b-gray-400 text-darkMode-colors-text" :"bg-lightMode-background border-b-gray-400"} flex flex-col justify-between border border-x-0 border-t-0 py-2 px-4 gap-2 w-full duration-200`}>
+        <nav className={`sticky z-50 top-0 ${darkMode ?"bg-darkMode-colors-background border-b-gray-400 text-darkMode-colors-text" :"bg-lightMode-background border-b-gray-400"} flex flex-col justify-between border border-x-0 border-t-0 py-2 px-4 gap-2 w-full duration-200`}>
             <div className="flex flex-row w-full justify-between gap-2 bg-">
                 <div className="flex w-full gap-4 items-center">
                 <Link to={`/`}>
