@@ -157,3 +157,68 @@ export async function getUser( username?:string ) {
         console.log(error);
     }
 }
+
+export async function getUserPhotos( username?:string ) {
+    const url = `https://api.unsplash.com/users/${username}/photos`
+    const options = {
+        method: 'GET',
+        headers: {
+            Authorization: Auth,
+        }
+    }
+
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getUserCollections( username?:string ) {
+    const url = `https://api.unsplash.com/users/${username}/collections`
+    const options = {
+        method: 'GET',
+        headers: {
+            Authorization: Auth,
+        }
+    }
+
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function getUserLikedPhotos( username?:string ) {
+    const url = `https://api.unsplash.com/users/${username}/likes`
+    const options = {
+        method: 'GET',
+        headers: {
+            Authorization: Auth,
+        }
+    }
+
+    try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        const result = await response.json();
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
