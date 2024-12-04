@@ -23,7 +23,7 @@ export default {
         darkMode :{
           colors: {
             'text': '#edeff2',
-            'background': '#040506',
+            'background': '#111314',
             'primary': '#62718d',
             'secondary': '#513847',
             'accent': '#734e52',
