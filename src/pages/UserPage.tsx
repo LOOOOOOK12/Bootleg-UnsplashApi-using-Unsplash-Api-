@@ -22,7 +22,7 @@ function UserPage({ darkMode }: NavBarProps) {
 
     return (
         <div className={` ${darkMode ? "dark" : ""}`}>
-            <div className="text-lightMode-text flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text py-2">
+            <div className="text-lightMode-text flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background dark:text-darkMode-colors-text py-2 pt-0">
                 {isLoading ? (
                     <Skeleton className="w-full h-80" />
                 ) : (
@@ -39,15 +39,27 @@ function UserPage({ darkMode }: NavBarProps) {
                                     <img src={userInfo.profile_image.large} alt={userInfo.username} className="h-full w-full rounded-full" />
                                 </div>
                             </div>
-                            <div className="flex flex-col gap-4 p-4 mt-24">
-                                <span className="flex gap-2" title="Bio">
-                                    <Captions />
-                                    <p>{userInfo.bio || "No bio"}</p>
-                                </span>
-                                <span className="flex gap-2" title="Portfolio Link">
-                                    <Link2 />
-                                    <p>{userInfo.portfolio_url}</p>
-                                </span>
+                            <div className="flex flex-col md:flex-row gap-2 px-4 mb-4 w-full">
+                                <div className="flex flex-col gap-4 p-4 mt-24 border border-gray-400 rounded-md">
+                                    <span className="flex gap-2" title="Bio">
+                                        <Captions />
+                                        <p>{userInfo.bio || "No bio"}</p>
+                                    </span>
+                                    <span className="flex gap-2" title="Portfolio Link">
+                                        <Link2 />
+                                        <p>{userInfo.portfolio_url || "No Url Available"}</p>
+                                    </span>
+                                </div>
+                                <div className="flex flex-col gap-4 p-4 mt-24 border border-gray-400 rounded-md">
+                                    <span className="flex gap-2" title="Bio">
+                                        <Captions />
+                                        <p>{userInfo.bio || "No bio"}</p>
+                                    </span>
+                                    <span className="flex gap-2" title="Portfolio Link">
+                                        <Link2 />
+                                        <p>{userInfo.portfolio_url || "No Url Available"}</p>
+                                    </span>
+                                </div>
                             </div>
                             <div className="px-4 h-full flex flex-col gap-4">
                                 <div className="flex flex-col md:flex-row gap-2">
@@ -70,10 +82,10 @@ function UserPage({ darkMode }: NavBarProps) {
                                         Liked Photos: {userInfo.total_likes}
                                     </button>
                                 </div>
-                                <div className="flex flex-wrap justify-center gap-2">
-                                {toggleState === "Photos" && userPhotos.map((pics) => (
+                                <div className="content-evenly columns-3 gap-2">
+                                    {toggleState === "Photos" && userPhotos.map((pics) => (
                                         <Link to={`/photos/${pics.id}`} className="h-72" key={pics.id}>
-                                            <img src={pics.urls.regular} className="h-full w-full object-cover" />
+                                            <img src={pics.urls.regular} className="object-cover mb-4" />
                                         </Link>
                                     ))}
                                     {toggleState === "Collections" && userCollections.map((collection) => (
@@ -90,30 +102,33 @@ function UserPage({ darkMode }: NavBarProps) {
                                             }}
                                             key={collection.id}
                                         >
-                                            <div className="relative h-96 w-full">
+                                            <div key={collection.id} className="relative h-96 w-full ">
                                                 <div className="w-full h-full gap-1 grid grid-cols-2 grid-rows-2 rounded-md brightness-50 hover:brightness-75 duration-200">
                                                     <img
-                                                        src={collection.preview_photos[0].urls.regular}
-                                                        title={collection.title}
-                                                        className="object-cover col-span-1 row-span-1 h-full w-full rounded-xl"
+                                                    src={collection.preview_photos[0].urls.regular}
+                                                    title={collection.title}
+                                                    className="object-cover col-span-1 row-span-1 h-full w-full rounded-xl"
                                                     />
                                                     <img
-                                                        src={collection.preview_photos[1].urls.regular}
-                                                        title={collection.title}
-                                                        className="object-cover col-span-2 row-span-1 h-full w-full rounded-xl"
+                                                    src={collection.preview_photos[1].urls.regular}
+                                                    title={collection.title}
+                                                    className="object-cover col-span-2 row-span-1 h-full w-full rounded-xl"
                                                     />
                                                     <img
-                                                        src={collection.preview_photos[2].urls.regular}
-                                                        title={collection.title}
-                                                        className="object-cover col-span-1 row-span-1 h-full w-full rounded-xl"
+                                                    src={collection.preview_photos[2].urls.regular}
+                                                    title={collection.title}
+                                                    className="object-cover col-span-3 row-span-2 h-full w-full rounded-xl"
                                                     />
                                                 </div>
-                                            </div>
+                                                <h1 className="absolute bottom-2 right-2 text-darkMode-colors-text text-2xl text-right font-bold">
+                                                    {collection.title}
+                                                </h1>
+                                                </div>
                                         </Link>
                                     ))}
                                     {toggleState === "LikedPhotos" && userLikedPhotos.map((pics) => (
                                         <Link to={`/photos/${pics.id}`} className="h-72" key={pics.id}>
-                                            <img src={pics.urls.regular} className="h-full w-full object-cover" />
+                                            <img src={pics.urls.regular} className="object-cover mb-2" />
                                         </Link>
                                     ))}
                                 </div>
