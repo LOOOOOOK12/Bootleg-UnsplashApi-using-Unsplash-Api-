@@ -22,7 +22,7 @@ function Nav({ toggleDarkmode, darkMode }: NavBarProps) {
 
     return (
         <nav className={`sticky z-50 top-0 ${darkMode ?"bg-darkMode-colors-background border-b-gray-400 text-darkMode-colors-text" :"bg-lightMode-background border-b-gray-400"} flex flex-col justify-between border border-x-0 border-t-0 py-2 px-4 gap-2 w-full duration-200`}>
-            <div className="flex flex-row w-full justify-between gap-2 bg-">
+            <div className="flex flex-row w-full justify-between gap-2 shrink-0">
                 <div className="flex w-full gap-4 items-center">
                 <Link to={`/`}>
                     {darkMode ? (
@@ -52,7 +52,7 @@ function Nav({ toggleDarkmode, darkMode }: NavBarProps) {
                     {darkMode ? <Sun color="#f9fafb" /> : <Moon color="#040506" />}
                 </button>
             </div>
-            <div className="w-full h-full justify-start text-sm">
+            <div className="w-full h-full justify-start text-xs">
                 <Swiper
                     breakpointsBase="container"
                     spaceBetween={6}
@@ -60,7 +60,7 @@ function Nav({ toggleDarkmode, darkMode }: NavBarProps) {
                     height={130} 
                     className="flex flex-row gap-2">
                     {topicsData?.map((topic) => (              
-                            <SwiperSlide className={`border ${darkMode ? " dark:text-darkMode-colors-text dark:hover:bg-gray-700" : "text-lightMode-text hover:bg-gray-200 duration-200"} border-gray-400 rounded-sm px-4 py-2 text-center`}>
+                            <SwiperSlide className={`border ${darkMode ? " dark:text-darkMode-colors-text dark:hover:bg-gray-700" : "text-lightMode-text hover:bg-gray-200 duration-200"} border-gray-400 rounded-sm px-1 py-2 text-center`}>
                                 <Link
                                 key={topic.slug}
                                 to={`/topics/${topic.slug}/photos`}
