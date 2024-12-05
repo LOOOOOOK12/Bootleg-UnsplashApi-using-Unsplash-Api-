@@ -124,8 +124,8 @@ function PicturePage({ darkMode }: NavBarProps) {
                                 </div>
                             </div>
                             <div className="flex flex-col w-full gap-2 bg-lightMode-background dark:bg-darkMode-colors-background">
-                                <h1>Related Images</h1>
-                                <div className="flex flex-wrap justify-center gap-3 dark:bg-darkMode-colors-background duration-200">
+                                <h1>Related Images:</h1>
+                                <div className="content-evenly columns-1 md:columns-3 lg:columns-4 gap-2 dark:bg-darkMode-colors-background duration-200">
                                     {searchResultsData.map((relPic) =>(
                                         <Link
                                             to={`/photos/${relPic.id}`}
@@ -133,9 +133,9 @@ function PicturePage({ darkMode }: NavBarProps) {
                                         >
                                             <img
                                             key={relPic.id}
-                                            src={relPic.urls.regular}
+                                            src={relPic.urls.regular  + "&auto=format"}
                                             alt={relPic.alt_description}
-                                            className=" h-80 object-cover"
+                                            className="object-cover mb-2"
                                             /> 
                                         </Link>
                                         
