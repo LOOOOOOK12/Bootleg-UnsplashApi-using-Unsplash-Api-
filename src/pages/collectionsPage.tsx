@@ -34,7 +34,7 @@ function collectionPage({ darkMode }: DarkModeProps) {
                     pfp: collection.user.profile_image.small,
                     }}
                 >
-                    <div key={collection.id} className="relative h-96 w-full ">
+                    <div key={collection.id} className="relative h-96 w-full border border-gray-400 rounded-xl">
                     <div className="w-full h-full gap-1 grid grid-cols-2 grid-rows-2 rounded-md brightness-50 hover:brightness-75 duration-200">
                         <img
                         src={collection.preview_photos[0].urls.regular}
