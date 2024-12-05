@@ -17,25 +17,23 @@ function mainpage({ darkMode }: DarkModeProps) {
         >
         <div
             id="Home"
-            className="flex flex-wrap justify-center gap-3 px-4 py-8 dark:bg-darkMode-colors-background duration-200"
+            className={`gap-2 p-3 content-evenly columns-1 md:columns-3 lg:columns-4 dark:bg-darkMode-colors-background duration-200`}
         >
             {photosData.map((pic) =>
                 isLoading ? (
-                    <Skeleton className="w-64 h-80" />
+                    <Skeleton className="h-80 mb-2" />
                 ) : (
                     <Link
                     key={pic.id}
                     to={`/photos/${pic.id}`}
                     >
-                    <div className="relative">
                         <img
                         id={pic.id}
-                        src={pic.urls.raw + "&auto=format&w=1080&h=300&fit=fill"}
+                        src={pic.urls.regular + "&auto=format"}
                         alt={pic.description || "Image"}
                         title={pic.alt_description || "No description"}
-                        className="object-cover"
+                        className="object-cover mb-2"
                         />
-                    </div>
                     </Link>
                 )
             )}
