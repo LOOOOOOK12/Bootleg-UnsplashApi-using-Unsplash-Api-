@@ -14,6 +14,8 @@ function collectionPage({ darkMode }: NavBarProps) {
     const { isloading, collectionPhotos } = useGetCollectionPhoto(page, id);
 
     console.log(state);
+    console.log(collectionPhotos);
+
     
     if(!state){
         return <div className='h-screen items-center justify-center'>Error: No collection data available</div>; 
@@ -26,12 +28,8 @@ function collectionPage({ darkMode }: NavBarProps) {
                 <div className='flex flex-col items-center gap-3'>
                     <h1 className='font-bold text-5xl'>{title}</h1>
                     <Link 
-                        to={`/users/${user}`}
-                        state={{
-                            username: user
-                        }}
-                        >
-                    <h2 className='flex gap-2 items-center text-xl'>{pfp? <img src={pfp} alt={user} className='rounded-full'/> : <CircleUserRound/> } {user}</h2>
+                        to={`/users/${user}`}>
+                        <h2 className='flex gap-2 items-center text-xl'>{pfp? <img src={pfp} alt={user} className='rounded-full'/> : <CircleUserRound/> } {user}</h2>
                     </Link>
                     <h3 className='text-xl'>{description}</h3>
                 </div>
