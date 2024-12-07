@@ -117,7 +117,7 @@ export async function getCollections(page: Number = 1){
     }
 }
 
-export async function getCollectionPhotos(page: Number = 1, id?: any) {
+export async function getCollectionPhotos(page: Number = 1, id: string) {
     const url = `https://api.unsplash.com/collections/${id}/photos?page=${page}&per_page=30`
     const options = {
         method: 'GET',
