@@ -19,6 +19,7 @@ function UserPage({ darkMode }: NavBarProps) {
     console.log(userInfo);
     console.log(userPhotos);
     console.log(userLikedPhotos);
+    console.log(userCollections)
 
     return (
         <div className={` ${darkMode ? "dark" : ""}`}>
@@ -30,17 +31,23 @@ function UserPage({ darkMode }: NavBarProps) {
                         <div className="w-full h-full">
                             <div className="relative w-full flex items-center justify-center h-80">
                                 <div className="h-full w-full flex flex-row relative z-10 overflow-hidden">
-                                    <img src={userInfo.photos[0].urls.regular} alt="" className="w-full h-full object-cover brightness-50 hover:brightness-75 duration-100" />
-                                    <img src={userInfo.photos[1].urls.regular} alt="" className="w-full h-full object-cover brightness-50 hover:brightness-75 duration-100" />
-                                    <img src={userInfo.photos[2].urls.regular} alt="" className="w-full h-full object-cover brightness-50 hover:brightness-75 duration-100" />
+                                    {userInfo.photos[0].urls.regular && userInfo.photos[1].urls.regular && userInfo.photos[2].urls.regular ?
+                                        <div className="w-full h-full">
+                                            <img src={userInfo.photos[0].urls.regular} alt="" className="w-full h-full object-cover brightness-50 hover:brightness-75 duration-100" />
+                                            <img src={userInfo.photos[1].urls.regular} alt="" className="w-full h-full object-cover brightness-50 hover:brightness-75 duration-100" />
+                                            <img src={userInfo.photos[2].urls.regular} alt="" className="w-full h-full object-cover brightness-50 hover:brightness-75 duration-100" />
+                                        </div> : 
+                                        <div className=" w-full h-full bg-gray-400">
+                                        </div>
+                                    }
                                 </div>
                                 <h1 className="absolute font-bold text-4xl z-20 md:text-6xl lg:text-8xl text-darkMode-colors-text">{userInfo.name}</h1>
                                 <div className="absolute size-48 z-30 -bottom-16 md:left-5 lg:left-5">
                                     <img src={userInfo.profile_image.large} alt={userInfo.username} className="h-full w-full rounded-full" />
                                 </div>
                             </div>
-                            <div className="flex flex-col md:flex-row gap-2 px-4 mb-4 w-full">
-                                <div className="flex flex-col gap-4 p-4 mt-24 border border-gray-400 rounded-md">
+                            <div className="flex flex-col md:flex-row gap-2 px-4 mb-4 mt-24 w-full">
+                                <div className="flex flex-col gap-4 p-4  border border-gray-400 rounded-md w-full">
                                     <span className="flex gap-2" title="Bio">
                                         <Captions />
                                         <p>{userInfo.bio || "No bio"}</p>
@@ -50,7 +57,7 @@ function UserPage({ darkMode }: NavBarProps) {
                                         <p>{userInfo.portfolio_url || "No Url Available"}</p>
                                     </span>
                                 </div>
-                                <div className="flex flex-col gap-4 p-4 mt-24 border border-gray-400 rounded-md">
+                                <div className=" w-full flex flex-col gap-4 p-4 border border-gray-400 rounded-md">
                                     <span className="flex gap-2" title="Bio">
                                         <Captions />
                                         <p>{userInfo.bio || "No bio"}</p>
@@ -82,46 +89,46 @@ function UserPage({ darkMode }: NavBarProps) {
                                         Liked Photos: {userInfo.total_likes}
                                     </button>
                                 </div>
-                                <div className="content-evenly columns-3 gap-2">
+                                <div className="content-evenly columns-1 md:columns-3 gap-2">
                                     {toggleState === "Photos" && userPhotos.map((pics) => (
                                         <Link to={`/photos/${pics.id}`} className="h-72" key={pics.id}>
                                             <img src={pics.urls.regular} className="object-cover mb-4" />
                                         </Link>
                                     ))}
-                                    {toggleState === "Collections" && userCollections.map((collection) => (
+                                    {toggleState === "Collections" && userCollections.map((collections) => (
                                         <Link
-                                            to={`/collections/${collection.id}/photos`}
+                                            to={`/collections/${collections.id}/photos`}
                                             state={{
-                                                id: collection.id,
-                                                image: collection.preview_photos[1].urls.raw + "&w=180&h=300&fit=max&dpr=1",
-                                                title: collection.title,
-                                                description: collection.description || "No description",
-                                                totalPhotos: collection.total_photos,
-                                                user: collection.user.username,
-                                                pfp: collection.user.profile_image.small,
+                                                id: collections.id,
+                                                image: collections.preview_photos[1].urls.raw + "&w=180&h=300&fit=max&dpr=1",
+                                                title: collections.title,
+                                                description: collections.description || "No description",
+                                                totalPhotos: collections.total_photos,
+                                                user: collections.user.username,
+                                                pfp: collections.user.profile_image.small,
                                             }}
-                                            key={collection.id}
+                                            key={collections.id}
                                         >
-                                            <div key={collection.id} className="relative h-96 w-full ">
+                                            <div key={collections.id} className="relative h-96 w-full ">
                                                 <div className="w-full h-full gap-1 grid grid-cols-2 grid-rows-2 rounded-md brightness-50 hover:brightness-75 duration-200">
                                                     <img
-                                                    src={collection.preview_photos[0].urls.regular}
-                                                    title={collection.title}
+                                                    src={collections.preview_photos[0].urls.regular}
+                                                    title={collections.title}
                                                     className="object-cover col-span-1 row-span-1 h-full w-full rounded-xl"
                                                     />
                                                     <img
-                                                    src={collection.preview_photos[1].urls.regular}
-                                                    title={collection.title}
+                                                    src={collections.preview_photos[1].urls.regular}
+                                                    title={collections.title}
                                                     className="object-cover col-span-2 row-span-1 h-full w-full rounded-xl"
                                                     />
                                                     <img
-                                                    src={collection.preview_photos[2].urls.regular}
-                                                    title={collection.title}
+                                                    src={collections.preview_photos[2].urls.regular}
+                                                    title={collections.title}
                                                     className="object-cover col-span-3 row-span-2 h-full w-full rounded-xl"
                                                     />
                                                 </div>
                                                 <h1 className="absolute bottom-2 right-2 text-darkMode-colors-text text-2xl text-right font-bold">
-                                                    {collection.title}
+                                                    {collections.title}
                                                 </h1>
                                                 </div>
                                         </Link>
