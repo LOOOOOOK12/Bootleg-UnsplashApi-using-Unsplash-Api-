@@ -13,7 +13,7 @@ function TopicsGallery({ darkMode }: DarkModeProps) {
 
     return (
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            <div id="Home" className="content-evenly columns-3 justify-center gap-2 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
+            <div id="Home" className="content-evenly columns-1 md:columns-3 lg:columns-4 justify-center gap-2 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
                 {topicPhotos.map((pic) => 
                 isLoading ? (
                     <Skeleton className="w-64 h-80" />
