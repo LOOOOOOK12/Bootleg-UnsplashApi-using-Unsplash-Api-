@@ -26,7 +26,7 @@ function collectionPage({ darkMode }: DarkModeProps) {
                     to={`/collections/${collection.id}/photos`}
                     state={{
                     id: collection.id,
-                    image: collection.preview_photos[1].urls.raw +"&w=180&h=300&fit=max&dpr=1",
+                    image: collection.preview_photos[3].urls.regular,
                     title: collection.title,
                     description: collection.description || "No description",
                     totalPhotos: collection.total_photos,
