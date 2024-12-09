@@ -12,7 +12,6 @@ export default function useGetCollectionPhoto(page: Number = 1 , id?:any){
             setIsLoading(true);
             const result = await PictureApi.getCollectionPhotos(page, id);
             setCollectionPhotos(result);
-            console.log(result);
         } catch (error) {
             console.log(error)
         } finally {
