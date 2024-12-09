@@ -30,7 +30,7 @@ function collectionPage({ darkMode }: DarkModeProps) {
                     title: collection.title,
                     description: collection.description || "No description",
                     totalPhotos: collection.total_photos,
-                    user: collection.user.username,
+                    username: collection.user.username,
                     pfp: collection.user.profile_image.small,
                     }}
                 >
