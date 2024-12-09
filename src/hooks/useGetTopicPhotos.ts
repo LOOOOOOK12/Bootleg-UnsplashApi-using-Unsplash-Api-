@@ -11,7 +11,6 @@ export default function useGetTopicPhotos(page: Number, slug?:string){
             setIsLoading(true);
             const result = await PictureApi.getTopicPhotos(page, slug);
             setTopicPhotos(result);
-            console.log(result);
         } catch (error) {
             console.log(error);
         }
