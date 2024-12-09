@@ -45,9 +45,6 @@ function PicturePage({ darkMode }: NavBarProps) {
                                         {photoData.user.profile_image ? (
                                             <Link
                                                 to={`/users/${photoData.user.username}`}
-                                                state={{
-                                                    username: photoData.user.username
-                                                }}
                                             >
                                                 <img src={photoData.user.profile_image.small} alt={photoData.username} className="rounded-full"/>
                                             </Link>
