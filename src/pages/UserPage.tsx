@@ -47,7 +47,7 @@ function UserPage({ darkMode }: NavBarProps) {
                                 </div>
                             </div>
                             <div className="flex flex-col md:flex-row gap-2 px-4 mb-4 mt-24 w-full">
-                                <div className="flex flex-col gap-4 p-4  border border-gray-400 rounded-md w-full">
+                                <div className="flex flex-col gap-2 p-2 border border-gray-400 rounded-md w-full">
                                     <span className="flex gap-2" title="Bio">
                                         <Captions />
                                         <p>{userInfo.bio || "No bio"}</p>
@@ -57,7 +57,7 @@ function UserPage({ darkMode }: NavBarProps) {
                                         <p>{userInfo.portfolio_url || "No Url Available"}</p>
                                     </span>
                                 </div>
-                                <div className=" w-full flex flex-col gap-4 p-4 border border-gray-400 rounded-md">
+                                <div className=" w-full flex flex-col gap-2 p-2 border border-gray-400 rounded-md">
                                     <span className="flex gap-2" title="Bio">
                                         <Captions />
                                         <p>{userInfo.bio || "No bio"}</p>
@@ -91,12 +91,15 @@ function UserPage({ darkMode }: NavBarProps) {
                                 </div>
                                 <div className="content-evenly columns-1 md:columns-3 gap-2">
                                     {toggleState === "Photos" && userPhotos.map((pics) => (
-                                        <Link to={`/photos/${pics.id}`} className="h-72" key={pics.id}>
-                                            <img src={pics.urls.regular} className="object-cover mb-4" />
-                                        </Link>
+                                        <div className="w-full h-full">
+                                            <Link to={`/photos/${pics.id}`} className="h-72" key={pics.id}>
+                                                <img src={pics.urls.regular} className="object-cover mb-4" />
+                                            </Link>
+                                        </div>
                                     ))}
                                     {toggleState === "Collections" && userCollections.map((collections) => (
-                                        <Link
+                                        <div className="w-full h-full">
+                                                <Link
                                             to={`/collections/${collections.id}/photos`}
                                             state={{
                                                 id: collections.id,
@@ -108,8 +111,9 @@ function UserPage({ darkMode }: NavBarProps) {
                                                 pfp: collections.user.profile_image.small,
                                             }}
                                             key={collections.id}
-                                        >
-                                            <div key={collections.id} className="relative h-96 w-full ">
+                                            className="w-full h-full "
+                                            >
+                                            <div key={collections.id} className="relative h-96 w-full mb-2">
                                                 <div className="w-full h-full gap-1 grid grid-cols-2 grid-rows-2 rounded-md brightness-50 hover:brightness-75 duration-200">
                                                     <img
                                                     src={collections.preview_photos[0].urls.regular}
@@ -132,6 +136,8 @@ function UserPage({ darkMode }: NavBarProps) {
                                                 </h1>
                                                 </div>
                                         </Link>
+                                        </div>
+                                        
                                     ))}
                                     {toggleState === "LikedPhotos" && userLikedPhotos.map((pics) => (
                                         <Link to={`/photos/${pics.id}`} className="h-72" key={pics.id}>
