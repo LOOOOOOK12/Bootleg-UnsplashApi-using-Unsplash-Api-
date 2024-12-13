@@ -31,9 +31,9 @@ function SearchPage({ darkMode }: NavBarProps) {
 
     return (
         <div className={`flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
-            <div className="max-h-full flex flex-wrap overflow-hidden justify-center gap-5 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
+            <div className="content-evenly columns-1 md:columns-3 lg:columns-4 gap-2 py-8 px-5 dark:bg-darkMode-colors-background duration-200">
                 {isLoading ? (
-                    Array(30).fill(0).map((_, idx) => <Skeleton key={idx} className="h-40 w-60" />)
+                    Array(30).fill(0).map((_, idx) => <Skeleton key={idx} className="object-cover mb-2 h-80" />)
                 ) : searchResultsData.length > 0 ? (
                     searchResultsData.map((searchPic) => (
                         <Link
@@ -51,7 +51,7 @@ function SearchPage({ darkMode }: NavBarProps) {
                                 src={searchPic.urls.regular}
                                 alt={searchPic.alt_description || 'Image'}
                                 title={searchPic.description || 'No description'}
-                                className="w-full h-80 grow"
+                                className="object-cover mb-2"
                             />
                         </Link>
                     ))
