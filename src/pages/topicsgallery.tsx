@@ -8,16 +8,15 @@ import { Skeleton } from '@/components/ui/skeleton';
 function TopicsGallery({ darkMode }: DarkModeProps) {
     const { page, handleNextPage, handlePrevPage } = usePage(1);
     const { slug } = useParams<{ slug: string }>();
-    
     const { topicPhotos, isLoading } = useGetTopicPhotos(page, slug);
 
     return (
         <div className={`relative flex flex-col bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? 'dark' : ''}`}>
             <div id="Home" className="content-evenly columns-1 md:columns-3 lg:columns-4 justify-center gap-2 px-4 py-8 dark:bg-darkMode-colors-background duration-200" >
                 {topicPhotos.map((pic) => 
-                isLoading ? (
-                    <Skeleton className="h-80 mb-2" />
-                ):(
+                    isLoading ? (
+                        <Skeleton className="h-80 mb-2" />
+                    ):(
                         <Link
                             key={pic.id}
                             to={`/photos/${pic.id}`}
