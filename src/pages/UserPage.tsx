@@ -2,12 +2,14 @@ import { NavBarProps } from "@/types/types";
 import useGetUser from "@/hooks/useGetUser";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useParams, Link } from "react-router-dom";
-import { Captions, Link2 } from "lucide-react";
+import useSearch from "@/hooks/useSearch";
+import { MessageSquareMore, Link2, Instagram, Twitter,CircleUserRound, MapPin } from "lucide-react";
 import { useState } from "react";
 
 function UserPage({ darkMode }: NavBarProps) {
     const { username } = useParams<{ username: string }>();
     const { userInfo, isLoading, userPhotos, userCollections, userLikedPhotos } = useGetUser(username);
+    const { handleSearch }=useSearch();
     const [toggleState, setToggleState] = useState<string>("Photos");
 
     const toggle = (t: string) => {
@@ -15,11 +17,7 @@ function UserPage({ darkMode }: NavBarProps) {
         console.log(toggleState);
     };
 
-    console.log(username);
     console.log(userInfo);
-    console.log(userPhotos);
-    console.log(userLikedPhotos);
-    console.log(userCollections)
 
     return (
         <div className={` ${darkMode ? "dark" : ""}`}>
@@ -41,31 +39,53 @@ function UserPage({ darkMode }: NavBarProps) {
                                         </div>
                                     }
                                 </div>
-                                <h1 className="absolute font-bold text-4xl z-20 md:text-6xl lg:text-8xl text-darkMode-colors-text">{userInfo.name}</h1>
-                                <div className="absolute size-48 z-30 -bottom-16 md:left-5 lg:left-5">
+                                <h1 className="absolute font-bold text-4xl z-20 md:text-6xl lg:text-7xl text-darkMode-colors-text">{userInfo.name}</h1>
+                                <div className="absolute size-40 z-30 -bottom-16 md:left-5 lg:left-5">
+                                    <div className={`absolute size-7 ${userInfo.for_hire ? "bg-green-400" : "bg-red-400"}  top-5 right-0 rounded-full border-2 border-slate-100 `} title={`${userInfo.for_hire ? "Available for Hire" : "Not for Hire"}`}></div>
                                     <img src={userInfo.profile_image.large} alt={userInfo.username} className="h-full w-full rounded-full" />
                                 </div>
                             </div>
-                            <div className="flex flex-col md:flex-row gap-2 px-4 mb-4 mt-24 w-full">
+                            <div className="w-full flex flex-col md:flex-row gap-2 px-4 mb-4 mt-24">
                                 <div className="flex flex-col gap-2 p-2 border border-gray-400 rounded-md w-full">
-                                    <span className="flex gap-2" title="Bio">
-                                        <Captions />
+                                    <span className="flex gap-1" title="Bio">
+                                        <MessageSquareMore />
                                         <p>{userInfo.bio || "No bio"}</p>
                                     </span>
-                                    <span className="flex gap-2" title="Portfolio Link">
+                                    <span className="flex gap-1" title="Portfolio Link">
                                         <Link2 />
                                         <p>{userInfo.portfolio_url || "No Url Available"}</p>
                                     </span>
                                 </div>
-                                <div className=" w-full flex flex-col gap-2 p-2 border border-gray-400 rounded-md">
-                                    <span className="flex gap-2" title="Bio">
-                                        <Captions />
-                                        <p>{userInfo.bio || "No bio"}</p>
+                                <div className="flex flex-col gap-2 p-2 border border-gray-400 rounded-md w-full">
+                                    <span className="flex gap-1" title="Name">
+                                        <CircleUserRound />
+                                        <p>{userInfo.first_name+ " " + userInfo.last_name || "No Instagram Available"}</p>
                                     </span>
-                                    <span className="flex gap-2" title="Portfolio Link">
-                                        <Link2 />
-                                        <p>{userInfo.portfolio_url || "No Url Available"}</p>
+                                    <span className="flex gap-1" title="Location">
+                                        <MapPin />
+                                        <p>{userInfo.location || "Location not available"}</p>
                                     </span>
+                                    <span className="flex gap-1" title="Instagram username">
+                                        <Instagram />
+                                        <p>{userInfo.social.instagram_username || "No instagram available"}</p>
+                                    </span>
+                                    <span className="flex gap-1" title="Twitter username">
+                                        <Twitter/>
+                                        <p>{userInfo.social.twitter_username || "No Twitter Available"}</p>
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-2 px-4 mb-4">
+                                <h1>Related Tags:</h1>
+                                <div className="flex flex-wrap gap-2">
+                                    {userInfo.tags.aggregated.map((tag:any)=>(
+                                        <button
+                                            onClick={() => handleSearch(tag.title)} 
+                                            key={tag.title} 
+                                        className="border border-darkMode-colors-primary rounded-sm px-4 py-2 hover:bg-gray-300 dark:hover:bg-gray-700 duration-200">
+                                            {tag.title}
+                                        </button>
+                                    ))}
                                 </div>
                             </div>
                             <div className="px-4 h-full flex flex-col gap-4">
@@ -90,60 +110,74 @@ function UserPage({ darkMode }: NavBarProps) {
                                     </button>
                                 </div>
                                 <div className="content-evenly columns-1 md:columns-3 gap-2">
-                                    {toggleState === "Photos" && userPhotos.map((pics) => (
-                                        <div className="w-full h-full">
-                                            <Link to={`/photos/${pics.id}`} className="h-72" key={pics.id}>
-                                                <img src={pics.urls.regular} className="object-cover mb-4" />
-                                            </Link>
-                                        </div>
-                                    ))}
-                                    {toggleState === "Collections" && userCollections.map((collections) => (
-                                        <div className="w-full h-full">
-                                                <Link
-                                            to={`/collections/${collections.id}/photos`}
-                                            state={{
-                                                id: collections.id,
-                                                image: collections.preview_photos[1].urls.raw + "&w=180&h=300&fit=max&dpr=1",
-                                                title: collections.title,
-                                                description: collections.description || "No description",
-                                                totalPhotos: collections.total_photos,
-                                                user: collections.user.username,
-                                                pfp: collections.user.profile_image.small,
-                                            }}
-                                            key={collections.id}
-                                            className="w-full h-full "
-                                            >
-                                            <div key={collections.id} className="relative h-96 w-full mb-2">
-                                                <div className="w-full h-full gap-1 grid grid-cols-2 grid-rows-2 rounded-md brightness-50 hover:brightness-75 duration-200">
-                                                    <img
-                                                    src={collections.preview_photos[0].urls.regular}
-                                                    title={collections.title}
-                                                    className="object-cover col-span-1 row-span-1 h-full w-full rounded-xl"
-                                                    />
-                                                    <img
-                                                    src={collections.preview_photos[1].urls.regular}
-                                                    title={collections.title}
-                                                    className="object-cover col-span-2 row-span-1 h-full w-full rounded-xl"
-                                                    />
-                                                    <img
-                                                    src={collections.preview_photos[2].urls.regular}
-                                                    title={collections.title}
-                                                    className="object-cover col-span-3 row-span-2 h-full w-full rounded-xl"
-                                                    />
+                                    {toggleState === "Photos" && (
+                                        userPhotos.length > 0 ? (
+                                            userPhotos.map((pics) => (
+                                                <div className="w-full h-full" key={pics.id}>
+                                                    <Link to={`/photos/${pics.id}`} className="h-72">
+                                                        <img src={pics.urls.regular} className="object-cover mb-4" />
+                                                    </Link>
                                                 </div>
-                                                <h1 className="absolute bottom-2 right-2 text-darkMode-colors-text text-2xl text-right font-bold">
-                                                    {collections.title}
-                                                </h1>
+                                            ))
+                                        ) : (
+                                            <p>No photos available...</p>
+                                        )
+                                    )}
+                                    {toggleState === "Collections" && (
+                                        userCollections.length > 0 ? (
+                                            userCollections.map((collections) => (
+                                                <div className="w-full h-full" key={collections.id}>
+                                                    <Link
+                                                        to={`/collections/${collections.id}/photos`}
+                                                        state={{
+                                                            id: collections.id,
+                                                            image: collections.preview_photos[1].urls.raw + "&w=180&h=300&fit=max&dpr=1",
+                                                            title: collections.title,
+                                                            description: collections.description || "No description",
+                                                            totalPhotos: collections.total_photos,
+                                                            user: collections.user.username,
+                                                            pfp: collections.user.profile_image.small,
+                                                        }}
+                                                    >
+                                                        <div className="relative h-96 w-full">
+                                                            <div className="w-full h-full gap-1 grid grid-cols-2 grid-rows-2 rounded-md brightness-50 hover:brightness-75 duration-200">
+                                                                <img
+                                                                    src={collections.preview_photos[0].urls.regular}
+                                                                    title={collections.title}
+                                                                    className="object-cover col-span-1 row-span-1 h-full w-full rounded-xl"
+                                                                />
+                                                                <img
+                                                                    src={collections.preview_photos[1].urls.regular}
+                                                                    title={collections.title}
+                                                                    className="object-cover col-span-2 row-span-1 h-full w-full rounded-xl"
+                                                                />
+                                                                <img
+                                                                    src={collections.preview_photos[2].urls.regular}
+                                                                    title={collections.title}
+                                                                    className="object-cover col-span-1 row-span-1 h-full w-full rounded-xl"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </Link>
                                                 </div>
-                                        </Link>
-                                        </div>
-                                        
-                                    ))}
-                                    {toggleState === "LikedPhotos" && userLikedPhotos.map((pics) => (
-                                        <Link to={`/photos/${pics.id}`} className="h-72" key={pics.id}>
-                                            <img src={pics.urls.regular} className="object-cover mb-2" />
-                                        </Link>
-                                    ))}
+                                            ))
+                                        ) : (
+                                            <p>No collections available...</p>
+                                        )
+                                    )}
+                                    {toggleState === "LikedPhotos" && (
+                                        userLikedPhotos.length > 0 ? (
+                                            userLikedPhotos.map((pics) => (
+                                                <div className="w-full h-full" key={pics.id}>
+                                                    <Link to={`/photos/${pics.id}`} className="h-72">
+                                                        <img src={pics.urls.regular} className="object-cover mb-4" />
+                                                    </Link>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <p>No liked photos available...</p>
+                                        )
+                                    )}
                                 </div>
                             </div>
                         </div>
