@@ -23,5 +23,6 @@ export default function useSearch(){
             console.log("Error fetching search results:", error);
         }
     }
+
     return{ handleSearch, searchQuery, setSearchQuery, fetchSearchResults, searchResultsData };
 }
