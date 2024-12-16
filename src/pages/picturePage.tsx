@@ -3,20 +3,22 @@ import { NavBarProps } from "@/types/types";
 import { CircleUserRound, ThumbsUpIcon, Camera, Download, Eye, CalendarClock, Captions, Focus } from "lucide-react";
 import useGetPhoto from "@/hooks/useGetPhoto";
 import useSearch from "@/hooks/useSearch";
+import PageButtons from "@/components/pageButtons";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect } from "react";
+import usePage from "@/hooks/usePage";
 
 function PicturePage({ darkMode }: NavBarProps) {
     const { pictureId } = useParams<{ pictureId: string }>();
     const { photoData } = useGetPhoto( pictureId );
+    const { page, handleNextPage, handlePrevPage } = usePage(1);
     const { handleSearch, fetchSearchResults, searchResultsData } = useSearch();
-    console.log(photoData);
 
     useEffect(() => {
         if (photoData && photoData.tags && photoData.tags.length > 0) {
-            fetchSearchResults(photoData.tags[0].title);
+            fetchSearchResults(photoData.tags[0].title, page);
         }
-    }, [photoData]);
+    }, [photoData, page]);
 
     return (
         <div className={`relative bg-lightMode-background dark:bg-darkMode-colors-background ${darkMode ? "dark" : ""}`}>
@@ -143,6 +145,11 @@ function PicturePage({ darkMode }: NavBarProps) {
                     </>    
                 )}
             </div>
+            <PageButtons
+                    toggleNextPage={handleNextPage}
+                    togglePrevPage={handlePrevPage}
+                    darkMode={darkMode}
+                />
         </div>
     );
 }
