@@ -39,6 +39,11 @@ function PicturePage({ darkMode }: NavBarProps) {
                             <Skeleton className="w-full h-40"/>
                             <Skeleton className="w-full h-40"/>
                         </div>
+                        <div className="flex flex-col">
+                            <div className=" flex flex-wrap">
+                                <Skeleton className="w-full h-10"/>
+                            </div>
+                        </div>
                     </>
                 ) : (
                     <>
@@ -61,7 +66,7 @@ function PicturePage({ darkMode }: NavBarProps) {
                                         </div>
                                 </div>
                             </div>
-                            <img src={photoData.urls.regular} alt={photoData.alt_description} className="h-96 object-cover"/>
+                            <img src={photoData.urls.regular+ "&h=550&auto=format"} alt={photoData.alt_description} className="object-cover"/>
                         <div className="w-full flex flex-col items-start gap-4">
                             <div className="w-full flex flex-col gap-3 md:flex-row">
                                 <div className="w-full flex flex-col gap-2 border border-gray-400 rounded-sm p-2">
