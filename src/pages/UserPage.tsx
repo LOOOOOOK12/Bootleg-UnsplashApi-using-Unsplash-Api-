@@ -27,7 +27,7 @@ function UserPage({ darkMode }: NavBarProps) {
                 ) : (
                     userInfo && (
                         <div className="w-full h-full">
-                            <div className="relative w-full flex items-center justify-center h-80">
+                            <div className="relative w-full flex items-center justify-center h-96">
                                 <div className="h-full w-full flex flex-row relative z-10 overflow-hidden">
                                     {userInfo.photos[0].urls.regular && userInfo.photos[1].urls.regular && userInfo.photos[2].urls.regular ?
                                         <div className="w-full h-full">
@@ -53,7 +53,7 @@ function UserPage({ darkMode }: NavBarProps) {
                                     </span>
                                     <span className="flex gap-1" title="Portfolio Link">
                                         <Link2 />
-                                        <p>{userInfo.portfolio_url || "No Url Available"}</p>
+                                        <a href={userInfo.portfolio_url} target="_blank">{userInfo.portfolio_url || "No Url Available"}</a>
                                     </span>
                                 </div>
                                 <div className="flex flex-col gap-2 p-2 border border-gray-400 rounded-md w-full">
